@@ -13,6 +13,12 @@ const AddEmployeesDialog = (props) => {
 
   const [name, setName] = useState()
 
+  const [tshirtLen, setTshirtLen] = useState()
+
+  const [legsLen, setLegsLen] = useState()
+
+  const [feetLen, setFeetLen] = useState()
+
   const [functionsOptions, setFunctionsOptions] = useState()
 
   const [selectedFunction, setSelectedFunction] = useState()
@@ -80,6 +86,56 @@ const AddEmployeesDialog = (props) => {
 
   const [mobile, setMobile] = useState()
 
+  const [email, setEmail] = useState()
+
+  const [ethnicitiesOptions, setEthnicitiesOptions] = useState()
+
+  const [selectedEthnicitie, setSelectedEthnicitie] = useState()
+
+  const [datebirth, setDatebirth] = useState()
+
+  const [statesOptions, setStatesOptions] = useState()
+
+  const [selectedBirthstate, setSelectedBirthstate] = useState()
+
+  const [selectedBirthcity, setSelectedBirthcity] = useState()
+
+  const [mothername, setMothername] = useState()
+
+  const [fathername, setFathername] = useState()
+
+  const [cpf, setCpf] = useState()
+
+  const [rg, setRg] = useState()
+
+  const [rgIssuingAgency, setRgIssuingAgency] = useState()
+
+  const [selectedRgState, setSelectedRgState] = useState()
+
+  const [rgExpeditionDate, setRgExpeditionDate] = useState()
+
+  const [militaryCertificate, setMilitaryCertificate] = useState()
+
+  const [pis, setPis] = useState()
+
+  const [pisRegisterDate, setPisRegisterDate] = useState()
+
+  const [votantTitle, setVotantTitle] = useState()
+
+  const [votantZone, setVotantZone] = useState()
+
+  const [votantSession, setVotantSession] = useState()
+
+  const [ctps, setCtps] = useState()
+
+  const [ctpsSerie, setCtpsSerie] = useState()
+
+  const [selectedCtpsState, setSelectedCtpsState] = useState()
+
+  const [ctpsEmissionDate, setCtpsEmissionDate] = useState()
+
+  const [cnh, setCnh] = useState()
+
   useEffect(() => {
     Promise
       .all(
@@ -93,7 +149,9 @@ const AddEmployeesDialog = (props) => {
           loadSelectOptions("/genders"),
           loadSelectOptions("civil-status"),
           loadSelectOptions("/cities"),
-          loadSelectOptions("/neighborhoods")
+          loadSelectOptions("/neighborhoods"),
+          loadSelectOptions("/ethnicities"),
+          loadSelectOptions("/states"),
         ]
       )
       .then((options) => {
@@ -108,6 +166,8 @@ const AddEmployeesDialog = (props) => {
           _civilStatusOptions,
           _citiesOptions,
           _neighborhoodsOptions,
+          _ethnicitiesOptions,
+          _statesOptions,
         ] = options
 
         setFunctionsOptions(_functionsOptions)
@@ -129,11 +189,21 @@ const AddEmployeesDialog = (props) => {
         setCitiesOptions(_citiesOptions)
 
         setNeighborhoodsOptions(_neighborhoodsOptions)
+
+        setEthnicitiesOptions(_ethnicitiesOptions)
+
+        setStatesOptions(_statesOptions)
       })
   }, [addEmployeesDialogOpen])
 
   const handleClose = () => {
     setName()
+
+    setTshirtLen()
+
+    setLegsLen()
+
+    setFeetLen()
 
     setSelectedFunction()
 
@@ -175,6 +245,52 @@ const AddEmployeesDialog = (props) => {
 
     setMobile()
 
+    setEmail()
+
+    setSelectedEthnicitie()
+
+    setDatebirth()
+
+    setSelectedBirthstate()
+
+    setSelectedBirthcity()
+
+    setMothername()
+
+    setFathername()
+
+    setCpf()
+
+    setRg()
+
+    setRgIssuingAgency()
+
+    setSelectedRgState()
+
+    setRgExpeditionDate()
+
+    setMilitaryCertificate()
+
+    setPis()
+
+    setPisRegisterDate()
+
+    setVotantTitle()
+
+    setVotantZone()
+
+    setVotantSession()
+
+    setCtps()
+
+    setCtpsSerie()
+
+    setSelectedCtpsState()
+
+    setCtpsEmissionDate()
+
+    setCnh()
+
     //
 
     getEmployeeList()
@@ -185,6 +301,9 @@ const AddEmployeesDialog = (props) => {
   const handleSubmit = () => {
     let body = {
       "name": name,
+      "tshirt_len": tshirtLen,
+      "legs_len": legsLen,
+      "feet_len": feetLen,
       "subsidiarie_id": joinedSubsidiarie?.id,
       "function_id": selectedFunction?.value,
       "turn_id": selectedTurn?.value,
@@ -207,6 +326,29 @@ const AddEmployeesDialog = (props) => {
       "neighborhood_id": selectedNeighborhood?.value,
       "phone": phone,
       "mobile": mobile,
+      "email": email,
+      "ethnicitie_id": selectedEthnicitie?.value,
+      "datebirth": datebirth,
+      "birthstate_id": selectedBirthstate?.value,
+      "birthcity_id": selectedBirthcity?.value,
+      "mothername": mothername,
+      "fathername": fathername,
+      "cpf": cpf,
+      "rg": rg,
+      "rg_issuing_agency": rgIssuingAgency,
+      "rg_state_id": selectedRgState?.value,
+      "rg_expedition_date": rgExpeditionDate,
+      "military_certificate": militaryCertificate,
+      "pis": pis,
+      "pis_register_date": pisRegisterDate,
+      "votant_title": votantTitle,
+      "votant_zone": votantZone,
+      "votant_session": votantSession,
+      "ctps": ctps,
+      "ctps_serie": ctpsSerie,
+      "ctps_state": selectedCtpsState?.value,
+      "ctps_emission_date": ctpsEmissionDate,
+      "cnh": cnh,
     }
 
     postRequest(`/subsidiaries/${joinedSubsidiarie?.id}/employees`, body)
@@ -225,6 +367,24 @@ const AddEmployeesDialog = (props) => {
           label={"Nome"}
           type={"text"}
           setStateValue={setName}
+        />
+
+        <FormInput
+          label={"Tamanho de camisa"}
+          type={"text"}
+          setStateValue={setTshirtLen}
+        />
+
+        <FormInput
+          label={"Tamanho de calça"}
+          type={"text"}
+          setStateValue={setLegsLen}
+        />
+
+        <FormInput
+          label={"Tamanho de calçado"}
+          type={"text"}
+          setStateValue={setFeetLen}
         />
 
         <FormSelect
@@ -351,6 +511,144 @@ const AddEmployeesDialog = (props) => {
           label={"Telefone celular"}
           type={"text"}
           setStateValue={setMobile}
+        />
+
+        <FormInput
+          label={"E-mail"}
+          type={"email"}
+          setStateValue={setEmail}
+        />
+
+        <FormSelect
+          label={"Etnia"}
+          options={ethnicitiesOptions}
+          setStateValue={setSelectedEthnicitie}
+        />
+
+        <FormInput
+          label={"Data de nascimento"}
+          type={"date"}
+          setStateValue={setDatebirth}
+        />
+
+        <FormSelect
+          label={"Estado"}
+          options={statesOptions}
+          setStateValue={setSelectedBirthstate}
+        />
+
+        <FormSelect
+          label={"Cidade"}
+          options={citiesOptions}
+          setStateValue={setSelectedBirthcity}
+        />
+
+        <FormInput
+          label={"Nome da mãe"}
+          type={"text"}
+          setStateValue={setMothername}
+        />
+
+        <FormInput
+          label={"Nome do pai"}
+          type={"text"}
+          setStateValue={setFathername}
+        />
+
+        <FormInput
+          label={"CPF"}
+          type={"text"}
+          setStateValue={setCpf}
+        />
+
+        <FormInput
+          label={"RG"}
+          type={"text"}
+          setStateValue={setRg}
+        />
+
+        <FormInput
+          label={"Órgão emissor"}
+          type={"text"}
+          setStateValue={setRgIssuingAgency}
+        />
+
+        <FormSelect
+          label={"Estado"}
+          options={statesOptions}
+          setStateValue={setSelectedRgState}
+        />
+
+        <FormInput
+          label={"Data de expedição"}
+          type={"date"}
+          setStateValue={setRgExpeditionDate}
+        />
+
+        <FormInput
+          label={"Certificado de reservista"}
+          type={"text"}
+          setStateValue={setMilitaryCertificate}
+        />
+
+        <FormInput
+          label={"PIS"}
+          type={"text"}
+          setStateValue={setPis}
+        />
+
+        <FormInput
+          label={"Data de cadastro"}
+          type={"date"}
+          setStateValue={setPisRegisterDate}
+        />
+
+        <FormInput
+          label={"Título de eleitor"}
+          type={"text"}
+          setStateValue={setVotantTitle}
+        />
+
+        <FormInput
+          label={"Zona"}
+          type={"text"}
+          setStateValue={setVotantZone}
+        />
+
+        <FormInput
+          label={"Sessão"}
+          type={"text"}
+          setStateValue={setVotantSession}
+        />
+
+        <FormInput
+          label={"CTPS"}
+          type={"text"}
+          setStateValue={setCtps}
+        />
+
+        <FormInput
+          label={"Série de CTPS"}
+          type={"text"}
+          setStateValue={setCtpsSerie}
+        />
+
+        <FormSelect
+          label={"UF"}
+          options={statesOptions}
+          setStateValue={setSelectedCtpsState}
+        />
+
+        <FormInput
+          label={"Data de emissão"}
+          type={"date"}
+          setStateValue={setCtpsEmissionDate}
+        />
+
+        <FormInput
+          label={"CNH"}
+          type={"text"}
+          setStateValue={setCnh}
         />
       </Dialog>
     </>
