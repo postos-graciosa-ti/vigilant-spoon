@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import Dialog from "../../components/Dialog"
+import FormCreatableSelect from "../../components/FormCreatableSelect"
 import FormInput from "../../components/FormInput"
 import FormSelect from "../../components/FormSelect"
 import postRequest from "../../requests/postRequest"
@@ -136,6 +137,76 @@ const AddEmployeesDialog = (props) => {
 
   const [cnh, setCnh] = useState()
 
+  const [cnhCategoriesOptions, setCnhCategoriesOptions] = useState()
+
+  const [selectedCnhCategorie, setSelectedCnhCategorie] = useState()
+
+  const [cnhEmissionDate, setCnhEmissionDate] = useState()
+
+  const [cnhValidityDate, setCnhValidityDate] = useState()
+
+  const [isFirstJob, setIsFirstJob] = useState()
+
+  const [alreadyHasBeenEmployee, setAlreadyHasBeenEmployee] = useState()
+
+  const [tradeUnionContributionThisYear, setTradeUnionContributionThisYear] = useState()
+
+  const [receivingUnemploymentInsurance, setReceivingUnemploymentInsurance] = useState()
+
+  const [monthlyWage, setMonthlyWage] = useState()
+
+  const [hourlyWage, setHourlyWage] = useState()
+
+  const [proRatedHours, setProRatedHours] = useState()
+
+  const [hasTransportVoucher, setHasTransportVoucher] = useState()
+
+  const [dailyTransportUnits, setDailyTransportUnits] = useState()
+
+  const [weeklyTransportUnits, setWeeklyTransportUnits] = useState()
+
+  const [monthlyTransportUnits, setMonthlyTransportUnits] = useState()
+
+  const [experiencesTimesOptions, setExperiencesTimesOptions] = useState()
+
+  const [selectedExperienceTime, setSelectedExperienceTime] = useState()
+
+  const [hasHazardPay, setHasHazardPay] = useState()
+
+  const [hasUnhealthyPay, setHasUnhealthyPay] = useState()
+
+  const [paymentMethodsOptions, setPaymentMethodsOptions] = useState()
+
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState()
+
+  const [banksOptions, setBanksOptions] = useState()
+
+  const [selectedBank, setSelectedBank] = useState()
+
+  const [bankAgency, setBankAgency] = useState()
+
+  const [bankAccount, setBankAccount] = useState()
+
+  const [wage, setWage] = useState()
+
+  const [wageAdvance, setWageAdvance] = useState()
+
+  const [hasHarmfullAgent, setHasHarmfullAgent] = useState()
+
+  const [healthInsurance, setHealthInsurance] = useState()
+
+  const [lifeInsurance, setLifeInsurance] = useState()
+
+  const [ag, setAg] = useState()
+
+  const [cc, setCc] = useState()
+
+  const [hasHarmfullExposition, setHasHarmfullExposition] = useState()
+
+  const [nationalitiesOptions, setNationalitiesOptions] = useState()
+
+  const [selectedNationalitie, setSelectedNationalitie] = useState()
+
   useEffect(() => {
     Promise
       .all(
@@ -152,6 +223,11 @@ const AddEmployeesDialog = (props) => {
           loadSelectOptions("/neighborhoods"),
           loadSelectOptions("/ethnicities"),
           loadSelectOptions("/states"),
+          loadSelectOptions("/cnh-categories"),
+          loadSelectOptions("/experiences-times"),
+          loadSelectOptions("/payment-methods"),
+          loadSelectOptions("/banks"),
+          loadSelectOptions("/nationalities"),
         ]
       )
       .then((options) => {
@@ -168,6 +244,11 @@ const AddEmployeesDialog = (props) => {
           _neighborhoodsOptions,
           _ethnicitiesOptions,
           _statesOptions,
+          _cnhCategoriesOptions,
+          _experiencesTimesOptions,
+          _paymentMethodsOptions,
+          _banksOptions,
+          _nationalitiesOptions,
         ] = options
 
         setFunctionsOptions(_functionsOptions)
@@ -193,6 +274,16 @@ const AddEmployeesDialog = (props) => {
         setEthnicitiesOptions(_ethnicitiesOptions)
 
         setStatesOptions(_statesOptions)
+
+        setCnhCategoriesOptions(_cnhCategoriesOptions)
+
+        setExperiencesTimesOptions(_experiencesTimesOptions)
+
+        setPaymentMethodsOptions(_paymentMethodsOptions)
+
+        setBanksOptions(_banksOptions)
+
+        setNationalitiesOptions(_nationalitiesOptions)
       })
   }, [addEmployeesDialogOpen])
 
@@ -291,6 +382,66 @@ const AddEmployeesDialog = (props) => {
 
     setCnh()
 
+    setSelectedCnhCategorie()
+
+    setCnhEmissionDate()
+
+    setCnhValidityDate()
+
+    setIsFirstJob()
+
+    setAlreadyHasBeenEmployee()
+
+    setTradeUnionContributionThisYear()
+
+    setReceivingUnemploymentInsurance()
+
+    setMonthlyWage()
+
+    setHourlyWage()
+
+    setProRatedHours()
+
+    setHasTransportVoucher()
+
+    setDailyTransportUnits()
+
+    setWeeklyTransportUnits()
+
+    setMonthlyTransportUnits()
+
+    setSelectedExperienceTime()
+
+    setHasHazardPay()
+
+    setHasUnhealthyPay()
+
+    setSelectedPaymentMethod()
+
+    setSelectedBank()
+
+    setBankAgency()
+
+    setBankAccount()
+
+    setWage()
+
+    setWageAdvance()
+
+    setHasHarmfullAgent()
+
+    setHealthInsurance()
+
+    setLifeInsurance()
+
+    setAg()
+
+    setCc()
+
+    setHasHarmfullExposition()
+
+    setSelectedNationalitie()
+
     //
 
     getEmployeeList()
@@ -349,6 +500,36 @@ const AddEmployeesDialog = (props) => {
       "ctps_state": selectedCtpsState?.value,
       "ctps_emission_date": ctpsEmissionDate,
       "cnh": cnh,
+      "cnh_category_id": selectedCnhCategorie?.value,
+      "cnh_emission_date": cnhEmissionDate,
+      "cnh_validity_date": cnhValidityDate,
+      "is_first_job": isFirstJob?.value,
+      "already_has_been_employee": alreadyHasBeenEmployee?.value,
+      "trade_union_contribution_this_year": tradeUnionContributionThisYear?.value,
+      "receiving_unemployment_insurance": receivingUnemploymentInsurance?.value,
+      "monthly_wage": monthlyWage,
+      "hourly_wage": hourlyWage,
+      "pro_rated_hours": proRatedHours,
+      "has_transport_voucher": hasTransportVoucher?.value,
+      "daily_transport_units": dailyTransportUnits,
+      "weekly_transport_units": weeklyTransportUnits,
+      "monthly_transport_units": monthlyTransportUnits,
+      "experience_time_id": selectedExperienceTime?.value,
+      "has_hazard_pay": hasHazardPay?.value,
+      "has_unhealthy_pay": hasUnhealthyPay?.value,
+      "payment_method_id": selectedPaymentMethod?.value,
+      "bank_id": selectedBank?.value,
+      "bank_agency": bankAgency,
+      "bank_account": bankAccount,
+      "wage": wage,
+      "wage_advance": wageAdvance,
+      "has_harmfull_agents": hasHarmfullAgent?.value,
+      "health_insurance": healthInsurance,
+      "life_insurance": lifeInsurance,
+      "ag": ag,
+      "cc": cc,
+      "has_harmfull_exposition": hasHarmfullExposition?.value,
+      "nationalitie_id": selectedNationalitie?.value,
     }
 
     postRequest(`/subsidiaries/${joinedSubsidiarie?.id}/employees`, body)
@@ -406,7 +587,7 @@ const AddEmployeesDialog = (props) => {
         />
 
         <FormSelect
-          label={"Situação contratal"}
+          label={"Situação contratual"}
           options={employeeStatusOptions}
           setStateValue={setSelectedEmployeeStatus}
         />
@@ -649,6 +830,190 @@ const AddEmployeesDialog = (props) => {
           label={"CNH"}
           type={"text"}
           setStateValue={setCnh}
+        />
+
+        <FormSelect
+          label={"Categoria"}
+          options={cnhCategoriesOptions}
+          setStateValue={setSelectedCnhCategorie}
+        />
+
+        <FormInput
+          label={"Data de emissão"}
+          type={"date"}
+          setStateValue={setCnhEmissionDate}
+        />
+
+        <FormInput
+          label={"Validade"}
+          type={"date"}
+          setStateValue={setCnhValidityDate}
+        />
+
+        <FormSelect
+          label={"Primeiro emprego?"}
+          options={trueFalseOptions}
+          setStateValue={setIsFirstJob}
+        />
+
+        <FormSelect
+          label={"Já foi empregado da empresa?"}
+          options={trueFalseOptions}
+          setStateValue={setAlreadyHasBeenEmployee}
+        />
+
+        <FormSelect
+          label={"Contribuição sindical nesse ano?"}
+          options={trueFalseOptions}
+          setStateValue={setTradeUnionContributionThisYear}
+        />
+
+        <FormSelect
+          label={"Recebendo seguro desemprego?"}
+          options={trueFalseOptions}
+          setStateValue={setReceivingUnemploymentInsurance}
+        />
+
+        <FormInput
+          label={"Mensalista"}
+          type={"text"}
+          setStateValue={setMonthlyWage}
+        />
+
+        <FormInput
+          label={"valor/horista"}
+          type={"text"}
+          setStateValue={setHourlyWage}
+        />
+
+        <FormInput
+          label={"Proporcional a jornada"}
+          type={"text"}
+          setStateValue={setProRatedHours}
+        />
+
+        <FormSelect
+          label={"Vale transporte?"}
+          options={trueFalseOptions}
+          setStateValue={setHasTransportVoucher}
+        />
+
+        <FormInput
+          label={"Carga diária"}
+          type={"text"}
+          setStateValue={setDailyTransportUnits}
+        />
+
+        <FormInput
+          label={"Carga semanal"}
+          type={"text"}
+          setStateValue={setWeeklyTransportUnits}
+        />
+
+        <FormInput
+          label={"Carga mensal"}
+          type={"text"}
+          setStateValue={setMonthlyTransportUnits}
+        />
+
+        <FormSelect
+          label={"Tempo de experiência"}
+          options={experiencesTimesOptions}
+          setStateValue={setSelectedExperienceTime}
+        />
+
+        <FormSelect
+          label={"Periculosidade?"}
+          options={trueFalseOptions}
+          setStateValue={setHasHazardPay}
+        />
+
+        <FormSelect
+          label={"Insalubridade?"}
+          options={trueFalseOptions}
+          setStateValue={setHasUnhealthyPay}
+        />
+
+        <FormSelect
+          label={"Método de pagamento"}
+          options={paymentMethodsOptions}
+          setStateValue={setSelectedPaymentMethod}
+        />
+
+        <FormSelect
+          label={"Banco"}
+          options={banksOptions}
+          setStateValue={setSelectedBank}
+        />
+
+        <FormInput
+          label={"Agência do banco"}
+          type={"text"}
+          setStateValue={setBankAgency}
+        />
+
+        <FormInput
+          label={"Conta do banco"}
+          type={"text"}
+          setStateValue={setBankAccount}
+        />
+
+        <FormInput
+          label={"Salário"}
+          type={"text"}
+          setStateValue={setWage}
+        />
+
+        <FormInput
+          label={"Adiantamento salarial"}
+          type={"text"}
+          setStateValue={setWageAdvance}
+        />
+
+        <FormSelect
+          label={"Exposição a agente nocivo?"}
+          options={trueFalseOptions}
+          setStateValue={setHasHarmfullAgent}
+        />
+
+        <FormInput
+          label={"Plano de saúde"}
+          type={"text"}
+          setStateValue={setHealthInsurance}
+        />
+
+        <FormInput
+          label={"Seguro de vida"}
+          type={"text"}
+          setStateValue={setLifeInsurance}
+        />
+
+        <FormInput
+          label={"AG"}
+          type={"text"}
+          setStateValue={setAg}
+        />
+
+        <FormInput
+          label={"CC"}
+          type={"text"}
+          setStateValue={setCc}
+        />
+
+        <FormSelect
+          label={"Exposição a agentes nocivos"}
+          options={trueFalseOptions}
+          setStateValue={setHasHarmfullExposition}
+        />
+
+        <FormCreatableSelect
+          label="Nacionalidade"
+          options={nationalitiesOptions}
+          onValueChange={setSelectedNationalitie}
+          createOptionConfig={{
+            endpoint: "/nationalities",
+            setOptions: setNationalitiesOptions,
+          }}
         />
       </Dialog>
     </>

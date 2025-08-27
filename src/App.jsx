@@ -22,8 +22,6 @@ const App = () => {
 
     postRequest("/users/login", body)
       .then((response) => {
-        console.log(response)
-
         setBearerToken(response.data.access_token)
 
         setUserSession(response.data.user_data)

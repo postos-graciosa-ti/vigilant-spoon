@@ -35,6 +35,10 @@ const Home = () => {
           <span><b>E-mail</b>: {userSession?.email}</span>
         </div>
 
+        <div>
+          <span><b>Postos</b>: {userSession?.user_subsidiaries?.map((subsidiarie) => subsidiarie.name).join(", ")}</span>
+        </div>
+
         <div className="mt-3">
           <h3>Dados de filial</h3>
         </div>
