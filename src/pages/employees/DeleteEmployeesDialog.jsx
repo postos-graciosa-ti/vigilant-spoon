@@ -19,8 +19,6 @@ const DeleteEmployeesDialog = (props) => {
   }
 
   const handleSubmit = () => {
-    console.log("teste")
-
     deleteRequest(`/employees/${selectedEmployee?.id}`)
       .then(() => handleClose())
   }

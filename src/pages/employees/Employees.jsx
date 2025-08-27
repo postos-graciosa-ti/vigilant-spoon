@@ -21,8 +21,6 @@ const Employees = () => {
 
   const [selectedEmployee, setSelectedEmployee] = useState()
 
-  console.log(employeesList)
-
   const [addEmployeesDialogOpen, setAddEmployeesDialogOpen] = useState(false)
 
   const [editEmployeesDialogOpen, setEditEmployeesDialogOpen] = useState(false)
@@ -72,11 +70,15 @@ const Employees = () => {
                   </button>
 
                   <button
-                    className="btn btn-danger"
+                    className="btn btn-danger me-2"
                     title="Excluir"
                     onClick={() => handleOpenDialog(setDeleteEmployeesDialogOpen, setSelectedEmployee, employee)}
                   >
                     <i className="bi bi-trash"></i>
+                  </button>
+
+                  <button className="btn btn-secondary me-2">
+                    <i class="bi bi-gear-fill"></i>
                   </button>
                 </div>
               </div>

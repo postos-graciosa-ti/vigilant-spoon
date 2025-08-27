@@ -18,6 +18,7 @@ const Dialog = (props) => {
         onHide={handleCloseDialog}
         backdrop="static"
         keyboard={false}
+        fullscreen={true}
       >
         <Modal.Header closeButton>
           <Modal.Title>{title}</Modal.Title>
