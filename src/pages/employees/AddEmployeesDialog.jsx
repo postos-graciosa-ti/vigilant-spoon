@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import Dialog from "../../components/Dialog"
 import FormCreatableSelect from "../../components/FormCreatableSelect"
+import FormFileGroup from "../../components/FormFileGroup"
 import FormInput from "../../components/FormInput"
 import FormSelect from "../../components/FormSelect"
 import postRequest from "../../requests/postRequest"
@@ -206,6 +207,10 @@ const AddEmployeesDialog = (props) => {
   const [nationalitiesOptions, setNationalitiesOptions] = useState()
 
   const [selectedNationalitie, setSelectedNationalitie] = useState()
+
+  const [ctpsFile, setCtpsFile] = useState()
+
+  const [preEmploymentHealthCheckFile, setPreEmploymentHealthCheckFile] = useState()
 
   useEffect(() => {
     Promise
@@ -442,6 +447,10 @@ const AddEmployeesDialog = (props) => {
 
     setSelectedNationalitie()
 
+    setCtpsFile()
+
+    setPreEmploymentHealthCheckFile()
+
     //
 
     getEmployeeList()
@@ -530,6 +539,8 @@ const AddEmployeesDialog = (props) => {
       "cc": cc,
       "has_harmfull_exposition": hasHarmfullExposition?.value,
       "nationalitie_id": selectedNationalitie?.value,
+      "ctps_file": ctpsFile,
+      "pre_employment_health_check_file": preEmploymentHealthCheckFile,
     }
 
     postRequest(`/subsidiaries/${joinedSubsidiarie?.id}/employees`, body)
@@ -1014,6 +1025,16 @@ const AddEmployeesDialog = (props) => {
             endpoint: "/nationalities",
             setOptions: setNationalitiesOptions,
           }}
+        />
+
+        <FormFileGroup
+          label={"Arquivo de CTPS"}
+          setStateValue={setCtpsFile}
+        />
+
+        <FormFileGroup
+          label={"Exame médico admissional"}
+          setStateValue={setPreEmploymentHealthCheckFile}
         />
       </Dialog>
     </>

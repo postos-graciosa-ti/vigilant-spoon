@@ -2,17 +2,10 @@ import { useEffect, useState } from "react"
 import Navbar from "../../components/Navbar"
 import getRequest from "../../requests/getRequest"
 import useUserSessionStore from "../../stores/userSession"
+import handleOpenDialog from "../../utils/handleOpenDialog"
 import AddEmployessDialog from "./AddEmployeesDialog"
 import DeleteEmployeesDialog from "./DeleteEmployeesDialog"
 import EditEmployeesDialog from "./EditEmployeesDialog"
-
-const handleOpenDialog = (dialogSetState, setSelectedRow, selectedRow) => {
-  if (selectedRow) {
-    setSelectedRow(selectedRow)
-  }
-
-  dialogSetState(true)
-}
 
 const Employees = () => {
   const joinedSubsidiarie = useUserSessionStore((state) => state.joinedSubsidiarie)
