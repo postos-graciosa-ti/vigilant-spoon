@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import Dialog from "../../components/Dialog"
 import FormCreatableSelect from "../../components/FormCreatableSelect"
 import FormInput from "../../components/FormInput"
+import FormInputLink from "../../components/FormInputLink"
 import FormSelect from "../../components/FormSelect"
 import patchRequest from "../../requests/patchRequest"
 import useUserSessionStore from "../../stores/userSession"
@@ -212,6 +213,8 @@ const EditEmployeesDialog = (props) => {
   const [nationalitiesOptions, setNationalitiesOptions] = useState()
 
   const [selectedNationalitie, setSelectedNationalitie] = useState()
+
+  const [driveFilesUrl, setDriveFilesUrl] = useState()
 
   useEffect(() => {
     Promise
@@ -448,6 +451,8 @@ const EditEmployeesDialog = (props) => {
 
     setSelectedNationalitie()
 
+    setDriveFilesUrl()
+
     //
 
     setSelectedEmployee()
@@ -538,11 +543,14 @@ const EditEmployeesDialog = (props) => {
       "cc": cc,
       "has_harmfull_exposition": hasHarmfullExposition?.value,
       "nationalitie_id": selectedNationalitie?.value,
+      "drive_files_url": driveFilesUrl,
     }
 
     patchRequest(`/employees/${selectedEmployee?.id}`, body)
       .then(() => handleClose())
   }
+
+  console.log(selectedEmployee)
 
   return (
     <>
@@ -1100,6 +1108,12 @@ const EditEmployeesDialog = (props) => {
             setOptions: setNationalitiesOptions,
           }}
           defaultValue={selectedEmployee?.nationalitie_id}
+        />
+
+        <FormInputLink
+          label={"Documentos anexos"}
+          defaultValue={selectedEmployee?.drive_files_url}
+          setStateValue={setDriveFilesUrl}
         />
       </Dialog>
     </>

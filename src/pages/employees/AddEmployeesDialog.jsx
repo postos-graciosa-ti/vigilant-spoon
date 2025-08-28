@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import Dialog from "../../components/Dialog"
 import FormCreatableSelect from "../../components/FormCreatableSelect"
 import FormInput from "../../components/FormInput"
+import FormInputLink from "../../components/FormInputLink"
 import FormSelect from "../../components/FormSelect"
 import postRequest from "../../requests/postRequest"
 import useUserSessionStore from "../../stores/userSession"
@@ -206,6 +207,8 @@ const AddEmployeesDialog = (props) => {
   const [nationalitiesOptions, setNationalitiesOptions] = useState()
 
   const [selectedNationalitie, setSelectedNationalitie] = useState()
+
+  const [driveFilesUrl, setDriveFilesUrl] = useState()
 
   useEffect(() => {
     Promise
@@ -442,6 +445,8 @@ const AddEmployeesDialog = (props) => {
 
     setSelectedNationalitie()
 
+    setDriveFilesUrl()
+
     //
 
     getEmployeeList()
@@ -530,6 +535,7 @@ const AddEmployeesDialog = (props) => {
       "cc": cc,
       "has_harmfull_exposition": hasHarmfullExposition?.value,
       "nationalitie_id": selectedNationalitie?.value,
+      "drive_files_url": driveFilesUrl,
     }
 
     postRequest(`/subsidiaries/${joinedSubsidiarie?.id}/employees`, body)
@@ -1014,6 +1020,12 @@ const AddEmployeesDialog = (props) => {
             endpoint: "/nationalities",
             setOptions: setNationalitiesOptions,
           }}
+        />
+
+        <FormInputLink
+          label={"Documentos anexos"}
+          stateValue={driveFilesUrl}
+          setStateValue={setDriveFilesUrl}
         />
       </Dialog>
     </>

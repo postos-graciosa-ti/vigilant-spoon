@@ -5,9 +5,12 @@ import useUserSessionStore from "../../stores/userSession"
 import AddEmployessDialog from "./AddEmployeesDialog"
 import DeleteEmployeesDialog from "./DeleteEmployeesDialog"
 import EditEmployeesDialog from "./EditEmployeesDialog"
+import SendAdmissionToContabilityDialog from "./SendAdmissionToContabilityDialog"
 
 const handleOpenDialog = (dialogSetState, setSelectedRow, selectedRow) => {
   if (selectedRow) {
+    setSelectedRow()
+
     setSelectedRow(selectedRow)
   }
 
@@ -26,6 +29,8 @@ const Employees = () => {
   const [editEmployeesDialogOpen, setEditEmployeesDialogOpen] = useState(false)
 
   const [deleteEmployeesDialogOpen, setDeleteEmployeesDialogOpen] = useState(false)
+
+  const [sendAdmissionToContabilityDialogOpen, setSendAdmissionToContabilityDialogOpen] = useState(false)
 
   useEffect(() => {
     getEmployeeList()
@@ -60,9 +65,9 @@ const Employees = () => {
               <div className="card-body d-flex justify-content-between align-items-center">
                 <h5 className="card-title mb-0">{employee.name}</h5>
 
-                <div>
+                <div className="d-flex align-items-center gap-2">
                   <button
-                    className="btn btn-warning me-2"
+                    className="btn btn-warning"
                     title="Editar"
                     onClick={() => handleOpenDialog(setEditEmployeesDialogOpen, setSelectedEmployee, employee)}
                   >
@@ -70,16 +75,38 @@ const Employees = () => {
                   </button>
 
                   <button
-                    className="btn btn-danger me-2"
+                    className="btn btn-danger"
                     title="Excluir"
                     onClick={() => handleOpenDialog(setDeleteEmployeesDialogOpen, setSelectedEmployee, employee)}
                   >
                     <i className="bi bi-trash"></i>
                   </button>
 
-                  <button className="btn btn-secondary me-2">
-                    <i class="bi bi-gear-fill"></i>
-                  </button>
+                  <div className="dropdown">
+                    <button
+                      className="btn btn-secondary dropdown-toggle"
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <i className="bi bi-gear-fill"></i>
+                    </button>
+
+                    <ul className="dropdown-menu dropdown-menu-end">
+                      <li>
+                        <button
+                          className="dropdown-item"
+                          onClick={() => handleOpenDialog(setSendAdmissionToContabilityDialogOpen, setSelectedEmployee, employee)}
+                        >
+                          Encaminhar admissão para contabilidade
+                        </button>
+                      </li>
+
+                      {/* <li><a className="dropdown-item" href="#">Opção 1</a></li>
+                      <li><a className="dropdown-item" href="#">Opção 2</a></li>
+                      <li><a className="dropdown-item" href="#">Opção 3</a></li> */}
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
@@ -105,6 +132,13 @@ const Employees = () => {
         deleteEmployeesDialogOpen={deleteEmployeesDialogOpen}
         setDeleteEmployeesDialogOpen={setDeleteEmployeesDialogOpen}
         getEmployeeList={getEmployeeList}
+        selectedEmployee={selectedEmployee}
+        setSelectedEmployee={setSelectedEmployee}
+      />
+
+      <SendAdmissionToContabilityDialog
+        sendAdmissionToContabilityDialogOpen={sendAdmissionToContabilityDialogOpen}
+        setSendAdmissionToContabilityDialogOpen={setSendAdmissionToContabilityDialogOpen}
         selectedEmployee={selectedEmployee}
         setSelectedEmployee={setSelectedEmployee}
       />
