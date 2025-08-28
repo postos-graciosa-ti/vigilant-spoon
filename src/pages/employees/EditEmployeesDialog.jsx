@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import Dialog from "../../components/Dialog"
 import FormCreatableSelect from "../../components/FormCreatableSelect"
+import FormFileGroup from "../../components/FormFileGroup"
 import FormInput from "../../components/FormInput"
 import FormSelect from "../../components/FormSelect"
 import patchRequest from "../../requests/patchRequest"
@@ -212,6 +213,10 @@ const EditEmployeesDialog = (props) => {
   const [nationalitiesOptions, setNationalitiesOptions] = useState()
 
   const [selectedNationalitie, setSelectedNationalitie] = useState()
+
+  const [ctpsFile, setCtpsFile] = useState()
+
+  const [preEmploymentHealthCheckFile, setPreEmploymentHealthCheckFile] = useState()
 
   useEffect(() => {
     Promise
@@ -448,6 +453,10 @@ const EditEmployeesDialog = (props) => {
 
     setSelectedNationalitie()
 
+    setCtpsFile()
+
+    setPreEmploymentHealthCheckFile()
+
     //
 
     setSelectedEmployee()
@@ -538,6 +547,8 @@ const EditEmployeesDialog = (props) => {
       "cc": cc,
       "has_harmfull_exposition": hasHarmfullExposition?.value,
       "nationalitie_id": selectedNationalitie?.value,
+      "ctps_file": ctpsFile,
+      "pre_employment_health_check_file": preEmploymentHealthCheckFile,
     }
 
     patchRequest(`/employees/${selectedEmployee?.id}`, body)
@@ -549,7 +560,7 @@ const EditEmployeesDialog = (props) => {
       <Dialog
         dialogOpen={editEmployeesDialogOpen}
         handleCloseDialog={handleClose}
-        title={"Adicionar novo funcionário"}
+        title={"Editar funcionário"}
         handleSubmitDialog={handleSubmit}
       >
         <FormInput
@@ -1100,6 +1111,18 @@ const EditEmployeesDialog = (props) => {
             setOptions: setNationalitiesOptions,
           }}
           defaultValue={selectedEmployee?.nationalitie_id}
+        />
+
+        <FormFileGroup
+          label={"Arquivo de CTPS"}
+          setStateValue={setCtpsFile}
+          base64={selectedEmployee?.ctps_file}
+        />
+
+        <FormFileGroup
+          label={"Exame médico admissional"}
+          setStateValue={setPreEmploymentHealthCheckFile}
+          base64={selectedEmployee?.pre_employment_health_check_file}
         />
       </Dialog>
     </>
