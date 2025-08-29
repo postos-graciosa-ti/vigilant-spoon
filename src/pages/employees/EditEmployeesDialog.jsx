@@ -216,6 +216,10 @@ const EditEmployeesDialog = (props) => {
 
   const [driveFilesUrl, setDriveFilesUrl] = useState()
 
+  const [streetComplement, setStreetComplement] = useState()
+
+  const [selectedResidenceState, setSelectedResidenceState] = useState()
+
   useEffect(() => {
     Promise
       .all(
@@ -453,6 +457,10 @@ const EditEmployeesDialog = (props) => {
 
     setDriveFilesUrl()
 
+    setStreetComplement()
+
+    setSelectedResidenceState()
+
     //
 
     setSelectedEmployee()
@@ -544,13 +552,13 @@ const EditEmployeesDialog = (props) => {
       "has_harmfull_exposition": hasHarmfullExposition?.value,
       "nationalitie_id": selectedNationalitie?.value,
       "drive_files_url": driveFilesUrl,
+      "street_complement": streetComplement,
+      "residence_state_id": selectedResidenceState?.value,
     }
 
     patchRequest(`/employees/${selectedEmployee?.id}`, body)
       .then(() => handleClose())
   }
-
-  console.log(selectedEmployee)
 
   return (
     <>
@@ -1114,6 +1122,24 @@ const EditEmployeesDialog = (props) => {
           label={"Documentos anexos"}
           defaultValue={selectedEmployee?.drive_files_url}
           setStateValue={setDriveFilesUrl}
+        />
+
+        <FormInput
+          label={"Complemento"}
+          type={"text"}
+          setStateValue={setStreetComplement}
+          defaultValue={selectedEmployee?.street_complement}
+        />
+
+        <FormCreatableSelect
+          label="Estado de residência"
+          options={statesOptions}
+          onValueChange={setSelectedResidenceState}
+          createOptionConfig={{
+            endpoint: "/states",
+            setOptions: setStatesOptions,
+          }}
+          defaultValue={selectedEmployee?.residence_state_id}
         />
       </Dialog>
     </>

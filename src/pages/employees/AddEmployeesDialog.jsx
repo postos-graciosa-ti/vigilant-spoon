@@ -8,6 +8,7 @@ import postRequest from "../../requests/postRequest"
 import useUserSessionStore from "../../stores/userSession"
 import loadSelectOptions from "../../utils/loadSelectOptions"
 
+// NOTE: passar a utilizar bibliotecas de formulário para React para maior manutebilidade
 const AddEmployeesDialog = (props) => {
   const { addEmployeesDialogOpen, setAddEmployeesDialogOpen, getEmployeeList } = props
 
@@ -209,6 +210,10 @@ const AddEmployeesDialog = (props) => {
   const [selectedNationalitie, setSelectedNationalitie] = useState()
 
   const [driveFilesUrl, setDriveFilesUrl] = useState()
+
+  const [streetComplement, setStreetComplement] = useState()
+
+  const [selectedResidenceState, setSelectedResidenceState] = useState()
 
   useEffect(() => {
     Promise
@@ -447,6 +452,10 @@ const AddEmployeesDialog = (props) => {
 
     setDriveFilesUrl()
 
+    setStreetComplement()
+
+    setSelectedResidenceState()
+
     //
 
     getEmployeeList()
@@ -536,6 +545,8 @@ const AddEmployeesDialog = (props) => {
       "has_harmfull_exposition": hasHarmfullExposition?.value,
       "nationalitie_id": selectedNationalitie?.value,
       "drive_files_url": driveFilesUrl,
+      "street_complement": streetComplement,
+      "residence_state_id": selectedResidenceState?.value,
     }
 
     postRequest(`/subsidiaries/${joinedSubsidiarie?.id}/employees`, body)
@@ -1026,6 +1037,22 @@ const AddEmployeesDialog = (props) => {
           label={"Documentos anexos"}
           stateValue={driveFilesUrl}
           setStateValue={setDriveFilesUrl}
+        />
+
+        <FormInput
+          label={"Complemento"}
+          type={"text"}
+          setStateValue={setStreetComplement}
+        />
+
+        <FormCreatableSelect
+          label="Estado de residência"
+          options={statesOptions}
+          onValueChange={setSelectedResidenceState}
+          createOptionConfig={{
+            endpoint: "/states",
+            setOptions: setStatesOptions,
+          }}
         />
       </Dialog>
     </>
