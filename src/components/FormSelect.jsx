@@ -1,7 +1,7 @@
 import ReactSelect from "react-select"
 
 const FormSelect = (props) => {
-  const { label, options, setStateValue, defaultValue } = props
+  const { label, options, value, onChange } = props
 
   return (
     <>
@@ -13,8 +13,8 @@ const FormSelect = (props) => {
         <ReactSelect
           placeholder={""}
           options={options}
-          onChange={(value) => setStateValue(value)}
-          defaultValue={options?.find((option) => option.value == defaultValue)}
+          value={value}
+          onChange={onChange}
         />
       </div>
     </>

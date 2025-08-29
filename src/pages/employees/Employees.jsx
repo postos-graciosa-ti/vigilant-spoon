@@ -101,18 +101,6 @@ const Employees = () => {
                           Encaminhar admissão para contabilidade
                         </button>
                       </li>
-
-                      <li>
-                        <button
-                          className="dropdown-item"
-                        >
-                          Dependentes
-                        </button>
-                      </li>
-
-                      {/* <li><a className="dropdown-item" href="#">Opção 1</a></li>
-                      <li><a className="dropdown-item" href="#">Opção 2</a></li>
-                      <li><a className="dropdown-item" href="#">Opção 3</a></li> */}
                     </ul>
                   </div>
                 </div>
