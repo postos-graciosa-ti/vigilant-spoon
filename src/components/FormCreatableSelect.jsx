@@ -3,7 +3,7 @@ import getRequest from '../requests/getRequest'
 import postRequest from '../requests/postRequest'
 
 const FormCreatableSelect = (props) => {
-  const { label, options, onValueChange, createOptionConfig, defaultValue } = props
+  const { label, options, value, onChange, onValueChange, createOptionConfig, defaultValue } = props
 
   const handleOnCreateOption = (endpoint, body) => {
     postRequest(endpoint, body)
@@ -28,7 +28,8 @@ const FormCreatableSelect = (props) => {
         <CreatableSelect
           placeholder={""}
           options={options}
-          onChange={(selected) => onValueChange(selected)}
+          value={value}
+          onChange={onChange}
           onCreateOption={(newValue) =>
             handleOnCreateOption(createOptionConfig?.endpoint, { name: newValue })
           }

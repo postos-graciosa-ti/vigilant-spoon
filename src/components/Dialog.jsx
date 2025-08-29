@@ -9,6 +9,7 @@ const Dialog = (props) => {
     children,
     type = "add/edit",
     handleSubmitDialog,
+    disabledSubmitButton,
   } = props
 
   return (
@@ -39,6 +40,7 @@ const Dialog = (props) => {
           <Button
             variant={type == "add/edit" && "success" || "danger"}
             onClick={handleSubmitDialog}
+            disabled={disabledSubmitButton}
           >
             Confirmar
           </Button>

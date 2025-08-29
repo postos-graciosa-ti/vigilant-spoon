@@ -1,5 +1,5 @@
 const FormInput = (props) => {
-  const { label, type, setStateValue, defaultValue } = props
+  const { label, type, value, onChange } = props
 
   return (
     <>
@@ -11,8 +11,8 @@ const FormInput = (props) => {
         <input
           type={type}
           className="form-control"
-          onChange={(e) => setStateValue(e.target.value)}
-          defaultValue={defaultValue}
+          value={value}
+          onChange={onChange}
         />
       </div>
     </>
