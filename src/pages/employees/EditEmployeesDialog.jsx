@@ -109,6 +109,8 @@ const EditEmployeesDialog = (props) => {
       drive_files_url: "",
       street_complement: "",
       residence_state_id: null,
+      workdays_id: null,
+      school_level_id: null,
     }
   })
 
@@ -134,6 +136,8 @@ const EditEmployeesDialog = (props) => {
   const [paymentMethodsOptions, setPaymentMethodsOptions] = useState()
   const [banksOptions, setBanksOptions] = useState()
   const [nationalitiesOptions, setNationalitiesOptions] = useState()
+  const [workdaysOptions, setWorkdaysOptions] = useState()
+  const [schoolLevelsOptions, setSchoolLevelsOptions] = useState()
 
   // Função para encontrar a opção correspondente pelo valor
   const findOptionByValue = (options, value) => {
@@ -176,6 +180,8 @@ const EditEmployeesDialog = (props) => {
               case 'nationalitie_id': options = nationalitiesOptions; break
               case 'ctps_state': options = statesOptions; break
               case 'residence_state_id': options = statesOptions; break
+              case 'workdays_id': options = workdaysOptions; break
+              case 'school_level_id': options = schoolLevelsOptions; break
               default: options = null
             }
 
@@ -223,6 +229,8 @@ const EditEmployeesDialog = (props) => {
         loadSelectOptions("/payment-methods"),
         loadSelectOptions("/banks"),
         loadSelectOptions("/nationalities"),
+        loadSelectOptions("/workdays"),
+        loadSelectOptions("/school-levels"),
       ]).then((options) => {
         const [
           _functionsOptions,
@@ -242,6 +250,8 @@ const EditEmployeesDialog = (props) => {
           _paymentMethodsOptions,
           _banksOptions,
           _nationalitiesOptions,
+          _workdaysOptions,
+          _schoolLevelsOptions,
         ] = options
 
         setFunctionsOptions(_functionsOptions)
@@ -261,6 +271,8 @@ const EditEmployeesDialog = (props) => {
         setPaymentMethodsOptions(_paymentMethodsOptions)
         setBanksOptions(_banksOptions)
         setNationalitiesOptions(_nationalitiesOptions)
+        setWorkdaysOptions(_workdaysOptions)
+        setSchoolLevelsOptions(_schoolLevelsOptions)
       })
     }
   }, [editEmployeesDialogOpen])
@@ -306,6 +318,8 @@ const EditEmployeesDialog = (props) => {
       has_harmfull_exposition: data.has_harmfull_exposition?.value,
       nationalitie_id: data.nationalitie_id?.value,
       residence_state_id: data.residence_state_id?.value,
+      workdays_id: data.workdays_id?.value,
+      school_level_id: data.school_level_id?.value,
     }
 
     patchRequest(`/employees/${selectedEmployee?.id}`, body)
@@ -1375,6 +1389,32 @@ const EditEmployeesDialog = (props) => {
         render={({ field }) => (
           <FormInputLink
             label={"Documentos anexos"}
+            value={field.value}
+            onChange={field.onChange}
+          />
+        )}
+      />
+
+      <Controller
+        name="workdays_id"
+        control={control}
+        render={({ field }) => (
+          <FormSelect
+            label={"Semana de trabalho"}
+            options={workdaysOptions}
+            value={field.value}
+            onChange={field.onChange}
+          />
+        )}
+      />
+
+      <Controller
+        name="school_level_id"
+        control={control}
+        render={({ field }) => (
+          <FormSelect
+            label={"Escolaridade"}
+            options={schoolLevelsOptions}
             value={field.value}
             onChange={field.onChange}
           />
