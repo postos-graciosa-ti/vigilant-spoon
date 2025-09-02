@@ -139,6 +139,7 @@ const Employees = () => {
         requestAdmissionExamDialogOpen={requestAdmissionExamDialogOpen}
         setRequestAdmissionExamDialogOpen={setRequestAdmissionExamDialogOpen}
         selectedEmployee={selectedEmployee}
+        setSelectedEmployee={setSelectedEmployee}
       />
 
       <SendAdmissionToContabilityDialog
