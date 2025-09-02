@@ -139,6 +139,20 @@ const EditEmployeesDialog = (props) => {
   const [workdaysOptions, setWorkdaysOptions] = useState()
   const [schoolLevelsOptions, setSchoolLevelsOptions] = useState()
 
+  const [employeeParents, setEmployeeParents] = useState()
+
+  const [parentName, setParentName] = useState()
+
+  const [parentDatebirth, setParentDatebirth] = useState()
+
+  const [parentCityState, setParentCityState] = useState()
+
+  const [parentCpf, setParentCpf] = useState()
+
+  const [parentBook, setParentBook] = useState()
+
+  const [parentPaper, setParentPaper] = useState()
+
   // Função para encontrar a opção correspondente pelo valor
   const findOptionByValue = (options, value) => {
     return options?.find(option => option.value === value) || null
@@ -202,6 +216,8 @@ const EditEmployeesDialog = (props) => {
           }
         }
       })
+
+      setEmployeeParents(selectedEmployee?.parents)
     }
   }, [selectedEmployee, functionsOptions, turnsOptions, employeeStatusOptions,
     departmentsOptions, sectorsOptions, hierarchyStructureOptions, gendersOptions,
@@ -278,10 +294,50 @@ const EditEmployeesDialog = (props) => {
   }, [editEmployeesDialogOpen])
 
   const handleClose = () => {
+    setEmployeeParents()
+
+    setParentName()
+
+    setParentDatebirth()
+
+    setParentCityState()
+
+    setParentCpf()
+
+    setParentBook()
+
+    setParentPaper()
+
     reset()
+
     setSelectedEmployee(null)
+
     getEmployeeList()
+
     setEditEmployeesDialogOpen(false)
+  }
+
+  const handleAddEmployeeParent = () => {
+    let newEmployeeParent = {
+      "name": parentName,
+      "datebirth": parentDatebirth,
+      "cityState": parentCityState,
+      "cpf": parentCpf,
+      "book": parentBook,
+      "paper": parentPaper,
+    }
+
+    setEmployeeParents((prev) => {
+      if (prev) {
+        return [...prev, newEmployeeParent]
+      } else {
+        return [newEmployeeParent]
+      }
+    })
+  }
+
+  const handleRemoveEmployeeParent = (indexToRemove) => {
+    setEmployeeParents((prev) => prev.filter((_, index) => index !== indexToRemove));
   }
 
   const onSubmit = (data) => {
@@ -320,6 +376,7 @@ const EditEmployeesDialog = (props) => {
       residence_state_id: data.residence_state_id?.value,
       workdays_id: data.workdays_id?.value,
       school_level_id: data.school_level_id?.value,
+      parents: employeeParents,
     }
 
     patchRequest(`/employees/${selectedEmployee?.id}`, body)
@@ -1420,6 +1477,143 @@ const EditEmployeesDialog = (props) => {
           />
         )}
       />
+
+      <div className="bg-light rounded p-4 mb-3">
+        <div className="d-inline-flex justify-content-between w-100 mb-3">
+          <div>
+            <span className="fw-bold">
+              Adicionar novo dependente
+            </span>
+          </div>
+
+          <div>
+            <button className="btn btn-primary" onClick={handleAddEmployeeParent}>
+              Adicionar
+            </button>
+          </div>
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label fw-bold">
+            Nome
+          </label>
+
+          <input type="text" className="form-control" onChange={(e) => setParentName(e.target.value)} />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label fw-bold">
+            Data de nascimento
+          </label>
+
+          <input type="date" className="form-control" onChange={(e) => setParentDatebirth(e.target.value)} />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label fw-bold">
+            Cidade/UF
+          </label>
+
+          <input type="text" className="form-control" onChange={(e) => setParentCityState(e.target.value)} />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label fw-bold">
+            CPF
+          </label>
+
+          <input type="text" className="form-control" onChange={(e) => setParentCpf(e.target.value)} />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label fw-bold">
+            Livro
+          </label>
+
+          <input type="text" className="form-control" onChange={(e) => setParentBook(e.target.value)} />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label fw-bold">
+            Folha
+          </label>
+
+          <input type="text" className="form-control" onChange={(e) => setParentPaper(e.target.value)} />
+        </div>
+      </div>
+
+      <div className="bg-light p-4 rounded">
+        {
+          employeeParents && employeeParents.map((parent, i) => (
+            <>
+              <div className="w-100 d-inline-flex justify-content-between">
+                <div>
+                  <span className="fw-bold">
+                    #0{i + 1}
+                  </span>
+                </div>
+
+                <div>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => handleRemoveEmployeeParent(i)}
+                  >
+                    <i className="bi bi-trash"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label fw-bold">
+                  Nome
+                </label>
+
+                <input type="text" className="form-control" value={parent.name} disabled />
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label fw-bold">
+                  Data de nascimento
+                </label>
+
+                <input type="date" className="form-control" value={parent.datebirth} disabled />
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label fw-bold">
+                  Cidade/UF
+                </label>
+
+                <input type="text" className="form-control" value={parent.cityState} disabled />
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label fw-bold">
+                  CPF
+                </label>
+
+                <input type="text" className="form-control" value={parent.cpf} disabled />
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label fw-bold">
+                  Livro
+                </label>
+
+                <input type="text" className="form-control" value={parent.book} disabled />
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label fw-bold">
+                  Folha
+                </label>
+
+                <input type="text" className="form-control" value={parent.paper} disabled />
+              </div>
+            </>
+          ))
+        }
+      </div>
     </Dialog>
   )
 }
