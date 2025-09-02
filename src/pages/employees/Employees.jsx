@@ -2,20 +2,12 @@ import { useEffect, useState } from "react"
 import Navbar from "../../components/Navbar"
 import getRequest from "../../requests/getRequest"
 import useUserSessionStore from "../../stores/userSession"
+import handleOpenDialog from "../../utils/handleOpenDialog"
 import AddEmployessDialog from "./AddEmployeesDialog"
 import DeleteEmployeesDialog from "./DeleteEmployeesDialog"
 import EditEmployeesDialog from "./EditEmployeesDialog"
+import RequestAdmissionExamDialog from "./RequestAdmissionExamDialog"
 import SendAdmissionToContabilityDialog from "./SendAdmissionToContabilityDialog"
-
-const handleOpenDialog = (dialogSetState, setSelectedRow, selectedRow) => {
-  if (selectedRow) {
-    setSelectedRow()
-
-    setSelectedRow(selectedRow)
-  }
-
-  dialogSetState(true)
-}
 
 const Employees = () => {
   const joinedSubsidiarie = useUserSessionStore((state) => state.joinedSubsidiarie)
@@ -29,6 +21,8 @@ const Employees = () => {
   const [editEmployeesDialogOpen, setEditEmployeesDialogOpen] = useState(false)
 
   const [deleteEmployeesDialogOpen, setDeleteEmployeesDialogOpen] = useState(false)
+
+  const [requestAdmissionExamDialogOpen, setRequestAdmissionExamDialogOpen] = useState(false)
 
   const [sendAdmissionToContabilityDialogOpen, setSendAdmissionToContabilityDialogOpen] = useState(false)
 
@@ -96,6 +90,15 @@ const Employees = () => {
                       <li>
                         <button
                           className="dropdown-item"
+                          onClick={() => handleOpenDialog(setRequestAdmissionExamDialogOpen, setSelectedEmployee, employee)}
+                        >
+                          Solicitar exame admissional
+                        </button>
+                      </li>
+
+                      <li>
+                        <button
+                          className="dropdown-item"
                           onClick={() => handleOpenDialog(setSendAdmissionToContabilityDialogOpen, setSelectedEmployee, employee)}
                         >
                           Encaminhar admissão para contabilidade
@@ -130,6 +133,12 @@ const Employees = () => {
         getEmployeeList={getEmployeeList}
         selectedEmployee={selectedEmployee}
         setSelectedEmployee={setSelectedEmployee}
+      />
+
+      <RequestAdmissionExamDialog
+        requestAdmissionExamDialogOpen={requestAdmissionExamDialogOpen}
+        setRequestAdmissionExamDialogOpen={setRequestAdmissionExamDialogOpen}
+        selectedEmployee={selectedEmployee}
       />
 
       <SendAdmissionToContabilityDialog
