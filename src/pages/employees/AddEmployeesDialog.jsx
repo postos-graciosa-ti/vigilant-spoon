@@ -138,6 +138,14 @@ const AddEmployeesDialog = (props) => {
 
   const [parentDatebirth, setParentDatebirth] = useState()
 
+  const [parentCityState, setParentCityState] = useState()
+
+  const [parentCpf, setParentCpf] = useState()
+
+  const [parentBook, setParentBook] = useState()
+
+  const [parentPaper, setParentPaper] = useState()
+
   useEffect(() => {
     if (addEmployeesDialogOpen) {
       Promise.all([
@@ -221,7 +229,14 @@ const AddEmployeesDialog = (props) => {
   }
 
   const handleAddEmployeeParent = () => {
-    let newEmployeeParent = { "name": parentName, "datebirth": parentDatebirth }
+    let newEmployeeParent = {
+      "name": parentName,
+      "datebirth": parentDatebirth,
+      "cityState": parentCityState,
+      "cpf": parentCpf,
+      "book": parentBook,
+      "paper": parentPaper,
+    }
 
     setEmployeeParents((prev) => {
       if (prev) {
@@ -1404,6 +1419,38 @@ const AddEmployeesDialog = (props) => {
           </label>
 
           <input type="date" className="form-control" onChange={(e) => setParentDatebirth(e.target.value)} />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label fw-bold">
+            Cidade/UF
+          </label>
+
+          <input type="text" className="form-control" onChange={(e) => setParentCityState(e.target.value)} />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label fw-bold">
+            CPF
+          </label>
+
+          <input type="text" className="form-control" onChange={(e) => setParentCpf(e.target.value)} />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label fw-bold">
+            Livro
+          </label>
+
+          <input type="text" className="form-control" onChange={(e) => setParentBook(e.target.value)} />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label fw-bold">
+            Folha
+          </label>
+
+          <input type="text" className="form-control" onChange={(e) => setParentPaper(e.target.value)} />
         </div>
       </div>
 
