@@ -132,6 +132,12 @@ const AddEmployeesDialog = (props) => {
   const [workdaysOptions, setWorkdaysOptions] = useState()
   const [schoolLevelsOptions, setSchoolLevelsOptions] = useState()
 
+  const [employeeParents, setEmployeeParents] = useState()
+
+  const [parentName, setParentName] = useState()
+
+  const [parentDatebirth, setParentDatebirth] = useState()
+
   useEffect(() => {
     if (addEmployeesDialogOpen) {
       Promise.all([
@@ -201,9 +207,33 @@ const AddEmployeesDialog = (props) => {
   }, [addEmployeesDialogOpen])
 
   const handleClose = () => {
+    setEmployeeParents()
+
+    setParentName()
+
+    setParentDatebirth()
+
     reset()
+
     getEmployeeList()
+
     setAddEmployeesDialogOpen(false)
+  }
+
+  const handleAddEmployeeParent = () => {
+    let newEmployeeParent = { "name": parentName, "datebirth": parentDatebirth }
+
+    setEmployeeParents((prev) => {
+      if (prev) {
+        return [...prev, newEmployeeParent]
+      } else {
+        return [newEmployeeParent]
+      }
+    })
+  }
+
+  const handleRemoveEmployeeParent = (indexToRemove) => {
+    setEmployeeParents((prev) => prev.filter((_, index) => index !== indexToRemove));
   }
 
   const onSubmit = (data) => {
@@ -242,6 +272,7 @@ const AddEmployeesDialog = (props) => {
       residence_state_id: data.residence_state_id?.value,
       workdays_id: data.workdays_id?.value,
       school_level_id: data.school_level_id?.value,
+      parents: employeeParents,
     }
 
     postRequest(`/subsidiaries/${joinedSubsidiarie?.id}/employees`, body)
@@ -1343,6 +1374,79 @@ const AddEmployeesDialog = (props) => {
           />
         )}
       />
+
+      <div className="bg-light rounded p-4 mb-3">
+        <div className="d-inline-flex justify-content-between w-100 mb-3">
+          <div>
+            <span className="fw-bold">
+              Adicionar novo dependente
+            </span>
+          </div>
+
+          <div>
+            <button className="btn btn-primary" onClick={handleAddEmployeeParent}>
+              Adicionar
+            </button>
+          </div>
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label fw-bold">
+            Nome
+          </label>
+
+          <input type="text" className="form-control" onChange={(e) => setParentName(e.target.value)} />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label fw-bold">
+            Data de nascimento
+          </label>
+
+          <input type="date" className="form-control" onChange={(e) => setParentDatebirth(e.target.value)} />
+        </div>
+      </div>
+
+      <div className="bg-light p-4 rounded">
+        {
+          employeeParents && employeeParents.map((parent, i) => (
+            <>
+              <div className="w-100 d-inline-flex justify-content-between">
+                <div>
+                  <span className="fw-bold">
+                    #0{i + 1}
+                  </span>
+                </div>
+
+                <div>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => handleRemoveEmployeeParent(i)}
+                  >
+                    <i className="bi bi-trash"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label fw-bold">
+                  Nome
+                </label>
+
+                <input type="text" className="form-control" value={parent.name} disabled />
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label fw-bold">
+                  Data de nascimento
+                </label>
+
+                <input type="date" className="form-control" value={parent.datebirth} disabled />
+              </div>
+            </>
+          ))
+        }
+      </div>
     </Dialog>
   )
 }
