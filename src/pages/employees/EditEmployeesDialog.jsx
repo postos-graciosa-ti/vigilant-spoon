@@ -5,8 +5,10 @@ import FormCreatableSelect from "../../components/FormCreatableSelect"
 import FormInput from "../../components/FormInput"
 import FormInputLink from "../../components/FormInputLink"
 import FormSelect from "../../components/FormSelect"
+import PdfViewer from "../../components/PdfViewer"
 import patchRequest from "../../requests/patchRequest"
 import useUserSessionStore from "../../stores/userSession"
+import fileToBase64 from "../../utils/fileToBase64"
 import loadSelectOptions from "../../utils/loadSelectOptions"
 
 const EditEmployeesDialog = (props) => {
@@ -1542,7 +1544,7 @@ const EditEmployeesDialog = (props) => {
         </div>
       </div>
 
-      <div className="bg-light p-4 rounded">
+      <div className="bg-light p-4 rounded mb-3">
         {
           employeeParents && employeeParents.map((parent, i) => (
             <>
@@ -1614,6 +1616,240 @@ const EditEmployeesDialog = (props) => {
           ))
         }
       </div>
+
+      <Controller
+        name="ctps_file"
+        control={control}
+        render={({ field }) => (
+          <div className="mb-3">
+            <label className="form-label fw-bold">CTPS (arquivo)</label>
+
+            <input
+              type="file"
+              className="form-control"
+              onChange={async (e) => {
+                const file = e.target.files[0]
+
+                if (file) {
+                  const base64 = await fileToBase64(file)
+
+                  field.onChange(base64)
+                }
+              }}
+            />
+          </div>
+        )}
+      />
+
+      <PdfViewer base64={selectedEmployee?.ctps_file} />
+
+      <Controller
+        name="admission_health_exam_file"
+        control={control}
+        render={({ field }) => (
+          <div className="mb-3">
+            <label className="form-label fw-bold">Exame médico admissional</label>
+
+            <input
+              type="file"
+              className="form-control"
+              onChange={async (e) => {
+                const file = e.target.files[0]
+
+                if (file) {
+                  const base64 = await fileToBase64(file)
+
+                  field.onChange(base64)
+                }
+              }}
+            />
+          </div>
+        )}
+      />
+
+      <PdfViewer base64={selectedEmployee?.admission_health_exam_file} />
+
+      <Controller
+        name="identity_file"
+        control={control}
+        render={({ field }) => (
+          <div className="mt-3 mb-3">
+            <label className="form-label fw-bold">Identidade</label>
+
+            <input
+              type="file"
+              className="form-control"
+              onChange={async (e) => {
+                const file = e.target.files[0]
+
+                if (file) {
+                  const base64 = await fileToBase64(file)
+
+                  field.onChange(base64)
+                }
+              }}
+            />
+          </div>
+        )}
+      />
+
+      <PdfViewer base64={selectedEmployee?.identity_file} />
+
+      <Controller
+        name="cpf_file"
+        control={control}
+        render={({ field }) => (
+          <div className="mt-3 mb-3">
+            <label className="form-label fw-bold">CPF</label>
+
+            <input
+              type="file"
+              className="form-control"
+              onChange={async (e) => {
+                const file = e.target.files[0]
+
+                if (file) {
+                  const base64 = await fileToBase64(file)
+
+                  field.onChange(base64)
+                }
+              }}
+            />
+          </div>
+        )}
+      />
+
+      <PdfViewer base64={selectedEmployee?.cpf_file} />
+
+      <Controller
+        name="votant_title_file"
+        control={control}
+        render={({ field }) => (
+          <div className="mt-3 mb-3">
+            <label className="form-label fw-bold">Título de eleitor</label>
+
+            <input
+              type="file"
+              className="form-control"
+              onChange={async (e) => {
+                const file = e.target.files[0]
+
+                if (file) {
+                  const base64 = await fileToBase64(file)
+
+                  field.onChange(base64)
+                }
+              }}
+            />
+          </div>
+        )}
+      />
+
+      <PdfViewer base64={selectedEmployee?.votant_title_file} />
+
+      <Controller
+        name="residence_proof"
+        control={control}
+        render={({ field }) => (
+          <div className="mt-3 mb-3">
+            <label className="form-label fw-bold">Comprovante de residência</label>
+
+            <input
+              type="file"
+              className="form-control"
+              onChange={async (e) => {
+                const file = e.target.files[0]
+
+                if (file) {
+                  const base64 = await fileToBase64(file)
+
+                  field.onChange(base64)
+                }
+              }}
+            />
+          </div>
+        )}
+      />
+
+      <PdfViewer base64={selectedEmployee?.residence_proof} />
+
+      <Controller
+        name="cnh_file"
+        control={control}
+        render={({ field }) => (
+          <div className="mt-3 mb-3">
+            <label className="form-label fw-bold">CNH</label>
+
+            <input
+              type="file"
+              className="form-control"
+              onChange={async (e) => {
+                const file = e.target.files[0]
+
+                if (file) {
+                  const base64 = await fileToBase64(file)
+
+                  field.onChange(base64)
+                }
+              }}
+            />
+          </div>
+        )}
+      />
+
+      <PdfViewer base64={selectedEmployee?.cnh_file} />
+
+      <Controller
+        name="marriage_certificate_file"
+        control={control}
+        render={({ field }) => (
+          <div className="mt-3 mb-3">
+            <label className="form-label fw-bold">Certidão de casamento</label>
+
+            <input
+              type="file"
+              className="form-control"
+              onChange={async (e) => {
+                const file = e.target.files[0]
+
+                if (file) {
+                  const base64 = await fileToBase64(file)
+
+                  field.onChange(base64)
+                }
+              }}
+            />
+          </div>
+        )}
+      />
+
+      <PdfViewer base64={selectedEmployee?.marriage_certificate_file} />
+
+      <Controller
+        name="military_certificate_file"
+        control={control}
+        render={({ field }) => (
+          <div className="mt-3 mb-3">
+            <label className="form-label fw-bold">Certificado de reservista</label>
+
+            <input
+              type="file"
+              className="form-control"
+              onChange={async (e) => {
+                const file = e.target.files[0]
+
+                if (file) {
+                  const base64 = await fileToBase64(file)
+
+                  field.onChange(base64)
+                }
+              }}
+            />
+          </div>
+        )}
+      />
+
+      <PdfViewer base64={selectedEmployee?.military_certificate_file} />
     </Dialog>
   )
 }
