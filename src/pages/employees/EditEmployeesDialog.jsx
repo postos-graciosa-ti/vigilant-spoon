@@ -159,6 +159,8 @@ const EditEmployeesDialog = (props) => {
 
   const [parentVaccinationCard, setParentVaccinationCard] = useState()
 
+  const [parentSchoolingProof, setParentSchoolingProof] = useState()
+
   // Função para encontrar a opção correspondente pelo valor
   const findOptionByValue = (options, value) => {
     return options?.find(option => option.value === value) || null
@@ -333,6 +335,7 @@ const EditEmployeesDialog = (props) => {
       "paper": parentPaper,
       "birthCertificate": await fileToBase64(parentBirthCertificate),
       "vaccinationCard": await fileToBase64(parentVaccinationCard),
+      "schoolingProof": await fileToBase64(parentSchoolingProof),
     }
 
     setEmployeeParents((prev) => {
@@ -1572,6 +1575,18 @@ const EditEmployeesDialog = (props) => {
             onChange={(e) => setParentVaccinationCard(e.target.files[0])}
           />
         </div>
+
+        <div className="mb-3">
+          <label className="form-label fw-bold">
+            Comprovante de frequência escolar
+          </label>
+
+          <input
+            type="file"
+            className="form-control"
+            onChange={(e) => setParentSchoolingProof(e.target.files[0])}
+          />
+        </div>
       </div>
 
       <div className="bg-light p-4 rounded mb-3">
@@ -1657,6 +1672,14 @@ const EditEmployeesDialog = (props) => {
                 </label>
 
                 <PdfViewer base64={parent.vaccinationCard} />
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label fw-bold">
+                  Comprovante de frequência escolar
+                </label>
+
+                <PdfViewer base64={parent.schoolingProof} />
               </div>
             </>
           ))
