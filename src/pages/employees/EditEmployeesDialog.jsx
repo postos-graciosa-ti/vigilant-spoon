@@ -155,6 +155,12 @@ const EditEmployeesDialog = (props) => {
 
   const [parentPaper, setParentPaper] = useState()
 
+  const [parentBirthCertificate, setParentBirthCertificate] = useState()
+
+  const [parentVaccinationCard, setParentVaccinationCard] = useState()
+
+  const [parentSchoolingProof, setParentSchoolingProof] = useState()
+
   // Função para encontrar a opção correspondente pelo valor
   const findOptionByValue = (options, value) => {
     return options?.find(option => option.value === value) || null
@@ -319,7 +325,7 @@ const EditEmployeesDialog = (props) => {
     setEditEmployeesDialogOpen(false)
   }
 
-  const handleAddEmployeeParent = () => {
+  const handleAddEmployeeParent = async () => {
     let newEmployeeParent = {
       "name": parentName,
       "datebirth": parentDatebirth,
@@ -327,6 +333,9 @@ const EditEmployeesDialog = (props) => {
       "cpf": parentCpf,
       "book": parentBook,
       "paper": parentPaper,
+      "birthCertificate": await fileToBase64(parentBirthCertificate),
+      "vaccinationCard": await fileToBase64(parentVaccinationCard),
+      "schoolingProof": await fileToBase64(parentSchoolingProof),
     }
 
     setEmployeeParents((prev) => {
@@ -1542,6 +1551,42 @@ const EditEmployeesDialog = (props) => {
 
           <input type="text" className="form-control" onChange={(e) => setParentPaper(e.target.value)} />
         </div>
+
+        <div className="mb-3">
+          <label className="form-label fw-bold">
+            Certidão de nascimento
+          </label>
+
+          <input
+            type="file"
+            className="form-control"
+            onChange={(e) => setParentBirthCertificate(e.target.files[0])}
+          />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label fw-bold">
+            Carteira de vacinação
+          </label>
+
+          <input
+            type="file"
+            className="form-control"
+            onChange={(e) => setParentVaccinationCard(e.target.files[0])}
+          />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label fw-bold">
+            Comprovante de frequência escolar
+          </label>
+
+          <input
+            type="file"
+            className="form-control"
+            onChange={(e) => setParentSchoolingProof(e.target.files[0])}
+          />
+        </div>
       </div>
 
       <div className="bg-light p-4 rounded mb-3">
@@ -1611,6 +1656,30 @@ const EditEmployeesDialog = (props) => {
                 </label>
 
                 <input type="text" className="form-control" value={parent.paper} disabled />
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label fw-bold">
+                  Certidão de nascimento
+                </label>
+
+                <PdfViewer base64={parent.birthCertificate} />
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label fw-bold">
+                  Carteira de vacinação
+                </label>
+
+                <PdfViewer base64={parent.vaccinationCard} />
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label fw-bold">
+                  Comprovante de frequência escolar
+                </label>
+
+                <PdfViewer base64={parent.schoolingProof} />
               </div>
             </>
           ))

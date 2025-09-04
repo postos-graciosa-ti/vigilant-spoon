@@ -147,6 +147,12 @@ const AddEmployeesDialog = (props) => {
 
   const [parentPaper, setParentPaper] = useState()
 
+  const [parentBirthCertificate, setParentBirthCertificate] = useState()
+
+  const [parentVaccinationCard, setParentVaccinationCard] = useState()
+
+  const [parentSchoolingProof, setParentSchoolingProof] = useState()
+
   useEffect(() => {
     if (addEmployeesDialogOpen) {
       Promise.all([
@@ -229,7 +235,7 @@ const AddEmployeesDialog = (props) => {
     setAddEmployeesDialogOpen(false)
   }
 
-  const handleAddEmployeeParent = () => {
+  const handleAddEmployeeParent = async () => {
     let newEmployeeParent = {
       "name": parentName,
       "datebirth": parentDatebirth,
@@ -237,6 +243,9 @@ const AddEmployeesDialog = (props) => {
       "cpf": parentCpf,
       "book": parentBook,
       "paper": parentPaper,
+      "birthCertificate": await fileToBase64(parentBirthCertificate),
+      "vaccinationCard": await fileToBase64(parentVaccinationCard),
+      "schoolingProof": await fileToBase64(parentSchoolingProof),
     }
 
     setEmployeeParents((prev) => {
@@ -1452,6 +1461,42 @@ const AddEmployeesDialog = (props) => {
           </label>
 
           <input type="text" className="form-control" onChange={(e) => setParentPaper(e.target.value)} />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label fw-bold">
+            Certidão de nascimento
+          </label>
+
+          <input
+            type="file"
+            className="form-control"
+            onChange={(e) => setParentBirthCertificate(e.target.files[0])}
+          />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label fw-bold">
+            Carteira de vacinação
+          </label>
+
+          <input
+            type="file"
+            className="form-control"
+            onChange={(e) => setParentVaccinationCard(e.target.files[0])}
+          />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label fw-bold">
+            Comprovante de frequência escolar
+          </label>
+
+          <input
+            type="file"
+            className="form-control"
+            onChange={(e) => setParentSchoolingProof(e.target.files[0])}
+          />
         </div>
       </div>
 
