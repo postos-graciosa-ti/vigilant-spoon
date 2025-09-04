@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import Navbar from "../../components/Navbar"
 import getRequest from "../../requests/getRequest"
+import useSelectOptionsStore from "../../stores/selectOptions"
 import useUserSessionStore from "../../stores/userSession"
 import handleOpenDialog from "../../utils/handleOpenDialog"
 import AddEmployessDialog from "./AddEmployeesDialog"
@@ -11,6 +12,8 @@ import SendAdmissionToContabilityDialog from "./SendAdmissionToContabilityDialog
 
 const Employees = () => {
   const joinedSubsidiarie = useUserSessionStore((state) => state.joinedSubsidiarie)
+
+  const { getOptions } = useSelectOptionsStore()
 
   const [employeesList, setEmployeesList] = useState()
 
@@ -27,6 +30,8 @@ const Employees = () => {
   const [sendAdmissionToContabilityDialogOpen, setSendAdmissionToContabilityDialogOpen] = useState(false)
 
   useEffect(() => {
+    getOptions()
+
     getEmployeeList()
   }, [])
 
