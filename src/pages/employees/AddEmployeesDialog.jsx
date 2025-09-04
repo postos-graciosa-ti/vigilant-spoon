@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { useFieldArray, useForm } from "react-hook-form"
 import Dialog from "../../components/Dialog"
 import Input from "../../components/Input"
@@ -19,15 +20,21 @@ const AddEmployeesDialog = (props) => {
 
   const { trueFalseOptions, functionsOptions } = useSelectOptionsStore()
 
+  const [disabledSubmitButton, setDisabledSubmitButton] = useState(false)
+
   const onClose = () => {
     reset()
 
     getEmployeeList()
 
+    setDisabledSubmitButton(false)
+
     setAddEmployeesDialogOpen(false)
   }
 
   const onSubmit = (data) => {
+    setDisabledSubmitButton(true)
+
     const body = {
       subsidiarie_id: joinedSubsidiarie?.id,
       ...data,
@@ -43,6 +50,7 @@ const AddEmployeesDialog = (props) => {
       handleCloseDialog={onClose}
       title="Adicionar funcionário"
       handleSubmitDialog={handleSubmit(onSubmit)}
+      disabledSubmitButton={disabledSubmitButton}
     >
       <Input
         control={control}
