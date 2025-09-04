@@ -3,5 +3,19 @@ export const createEmployeesDefaultValues = (selectedEmployee = {}) => ({
   function_id: selectedEmployee.function_id !== undefined ? selectedEmployee.function_id : null, // padrão para campos do tipo Select
   street_complement: selectedEmployee.street_complement || "",
   has_hazard_pay: selectedEmployee.has_hazard_pay !== undefined ? selectedEmployee.has_hazard_pay : null,
-  military_certificate_file: null,
+
+  parents:
+    selectedEmployee.parents ?
+      selectedEmployee.parents
+      :
+      [
+        {
+          "name": "",
+          "relation": "",
+          "birthCertificate": "",
+        }
+      ],
+
+  // padrão para campos do tipo File
+  military_certificate_file: selectedEmployee.military_certificate_file ? selectedEmployee.military_certificate_file : null,
 })

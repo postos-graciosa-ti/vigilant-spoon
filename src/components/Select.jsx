@@ -13,6 +13,7 @@ const Select = (props) => {
         control={control}
         render={({ field }) => (
           <ReactSelect
+            placeholder={""}
             {...field}
             options={options}
             getOptionValue={(option) => option.value.toString()}
