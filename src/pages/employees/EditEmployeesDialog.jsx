@@ -661,6 +661,41 @@ const EditEmployeesDialog = (props) => {
                 type="text"
               />
 
+              <Input
+                control={control}
+                label="Data de nascimento"
+                name={`parents.${index}.datebirth`}
+                type="date"
+              />
+
+              <Input
+                control={control}
+                label="Cidade/estado"
+                name={`parents.${index}.cityState`}
+                type="text"
+              />
+
+              <Input
+                control={control}
+                label="CPF"
+                name={`parents.${index}.cpf`}
+                type="text"
+              />
+
+              <Input
+                control={control}
+                label="Livro"
+                name={`parents.${index}.book`}
+                type="text"
+              />
+
+              <Input
+                control={control}
+                label="Folha"
+                name={`parents.${index}.paper`}
+                type="text"
+              />
+
               <InputFile
                 control={control}
                 label="Certidão de nascimento"
@@ -668,6 +703,22 @@ const EditEmployeesDialog = (props) => {
               />
 
               <PdfViewer base64={selectedEmployee?.parents?.[index]?.birthCertificate} />
+
+              <InputFile
+                control={control}
+                label="Carteira de vacinação"
+                name={`parents.${index}.vaccinationCard`}
+              />
+
+              <PdfViewer base64={selectedEmployee?.parents?.[index]?.vaccinationCard} />
+
+              <InputFile
+                control={control}
+                label="Comprovante de frequência escolar"
+                name={`parents.${index}.schoolingProof`}
+              />
+
+              <PdfViewer base64={selectedEmployee?.parents?.[index]?.schoolingProof} />
             </div>
           ))
         }
