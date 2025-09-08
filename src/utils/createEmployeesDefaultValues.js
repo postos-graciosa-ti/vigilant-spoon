@@ -95,7 +95,14 @@ export const createEmployeesDefaultValues = (selectedEmployee = {}) => ({
         {
           "name": "",
           "relation": "",
+          "datebirth": "",
+          "cityState": "",
+          "cpf": "",
+          "book": "",
+          "paper": "",
           "birthCertificate": "",
+          "vaccinationCard": "",
+          "schoolProof": "",
         }
       ],
 
