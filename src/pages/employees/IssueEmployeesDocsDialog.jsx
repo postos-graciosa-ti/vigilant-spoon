@@ -11,7 +11,7 @@ import EthnicityDoc from "./employeesDocs/EthnicityDoc"
 import HealthDoc from './employeesDocs/HealthDoc'
 import IntegrationDoc from './employeesDocs/IntegrationDoc'
 import ResponsabilityDoc from './employeesDocs/ResponsabilityDoc'
-import WhatsAppDoc from './employeesDocs/WhatsappDoc'
+import WhatsAppDoc from "./employeesDocs/WhatsAppDoc"
 
 const IssueEmployeesDocsDialog = (props) => {
   const { issueEmployeesDocsDialogOpen, setIssueEmployeesDocsDialogOpen, selectedEmployee, setSelectedEmployee } = props
@@ -73,9 +73,10 @@ const IssueEmployeesDocsDialog = (props) => {
       ),
       "IntegrationDoc": (
         <IntegrationDoc
-        joinedSubsidiarie={joinedSubsidiarie}
-        selectedEmployee={selectedEmployee}
-        employeeFunction={employeeFunction}
+          joinedSubsidiarie={joinedSubsidiarie}
+          selectedEmployee={selectedEmployee}
+          employeeFunction={employeeFunction}
+          deliveryDate={watch("IntegrationDocDeliveryDate")}
         />
       ),
     }
@@ -133,12 +134,23 @@ const IssueEmployeesDocsDialog = (props) => {
               />
             </>
           ) || selectedDocOption == "WhatsAppDoc" && (
-            <Input
-              control={control}
-              label={"Data de entrega"}
-              name={"whatsAppDocDeliveryDate"}
-              type={"date"}
-            />
+            <>
+              <Input
+                control={control}
+                label={"Data de entrega"}
+                name={"whatsAppDocDeliveryDate"}
+                type={"date"}
+              />
+            </>
+          ) || selectedDocOption == "IntegrationDoc" && (
+            <>
+              <Input
+                control={control}
+                label={"Data de entrega"}
+                name={"IntegrationDocDeliveryDate"}
+                type={"date"}
+              />
+            </>
           )
         )
       }
