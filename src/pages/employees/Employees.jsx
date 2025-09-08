@@ -7,6 +7,7 @@ import handleOpenDialog from "../../utils/handleOpenDialog"
 import AddEmployessDialog from "./AddEmployeesDialog"
 import DeleteEmployeesDialog from "./DeleteEmployeesDialog"
 import EditEmployeesDialog from "./EditEmployeesDialog"
+import IssueEmployeesDocsDialog from "./IssueEmployeesDocsDialog"
 import RequestAdmissionExamDialog from "./RequestAdmissionExamDialog"
 import SendAdmissionToContabilityDialog from "./SendAdmissionToContabilityDialog"
 
@@ -28,6 +29,8 @@ const Employees = () => {
   const [requestAdmissionExamDialogOpen, setRequestAdmissionExamDialogOpen] = useState(false)
 
   const [sendAdmissionToContabilityDialogOpen, setSendAdmissionToContabilityDialogOpen] = useState(false)
+
+  const [issueEmployeesDocsDialogOpen, setIssueEmployeesDocsDialogOpen] = useState(false)
 
   useEffect(() => {
     getOptions()
@@ -109,6 +112,15 @@ const Employees = () => {
                           Encaminhar admissão para contabilidade
                         </button>
                       </li>
+
+                      <li>
+                        <button
+                          className="dropdown-item"
+                          onClick={() => handleOpenDialog(setIssueEmployeesDocsDialogOpen, setSelectedEmployee, employee)}
+                        >
+                          Emitir documentos de admissão de funcionário
+                        </button>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -150,6 +162,13 @@ const Employees = () => {
       <SendAdmissionToContabilityDialog
         sendAdmissionToContabilityDialogOpen={sendAdmissionToContabilityDialogOpen}
         setSendAdmissionToContabilityDialogOpen={setSendAdmissionToContabilityDialogOpen}
+        selectedEmployee={selectedEmployee}
+        setSelectedEmployee={setSelectedEmployee}
+      />
+
+      <IssueEmployeesDocsDialog
+        issueEmployeesDocsDialogOpen={issueEmployeesDocsDialogOpen}
+        setIssueEmployeesDocsDialogOpen={setIssueEmployeesDocsDialogOpen}
         selectedEmployee={selectedEmployee}
         setSelectedEmployee={setSelectedEmployee}
       />

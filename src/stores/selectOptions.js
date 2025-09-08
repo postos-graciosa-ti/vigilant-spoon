@@ -2,6 +2,14 @@ import { create } from "zustand"
 import loadSelectOptions from "../utils/loadSelectOptions"
 
 const useSelectOptionsStore = create((set) => ({
+  docsOptions: [
+    { value: "ethnicityDoc", label: "Autodeclaração étnico-racial" },
+    { value: "ResponsabilityDoc", label: "Termo de responsabilidade" },
+    { value: "HealthDoc", label: "Termo de ciência do protocolo de homologação de atestado" },
+    { value: "WhatsAppDoc", label: "Termo de compromisso para utilização do grupo de WhatsApp" },
+    { value: "IntegrationDoc", label: "Termo de confirmação de participação na integração" },
+  ],
+
   trueFalseOptions: [
     { value: true, label: "Sim" },
     { value: false, label: "Não" },
