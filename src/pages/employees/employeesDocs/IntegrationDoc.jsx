@@ -1,6 +1,6 @@
 import dayjs from "dayjs"
 
-const IntegrationDoc = ({ joinedSubsidiarie, selectedEmployee, employeeFunction }) => {
+const IntegrationDoc = ({ joinedSubsidiarie, selectedEmployee, employeeFunction, deliveryDate }) => {
   return (
     <>
       <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -22,7 +22,7 @@ const IntegrationDoc = ({ joinedSubsidiarie, selectedEmployee, employeeFunction 
       </div>
 
       <p>
-        Joinville, {handDate || dayjs().format("DD/MM/YYYY")}
+        Joinville, {dayjs(deliveryDate).format("DD/MM/YYYY")}
       </p>
 
       <p>
