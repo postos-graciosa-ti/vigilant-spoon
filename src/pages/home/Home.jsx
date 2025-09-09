@@ -1,22 +1,35 @@
+import { useState } from "react"
 import Navbar from "../../components/Navbar"
 import useUserSessionStore from "../../stores/userSession"
+import handleOpenDialog from "../../utils/handleOpenDialog"
+import BirthdayListDialog from "./BirthdayListDialog"
 
 const Home = () => {
   const userSession = useUserSessionStore((state) => state.userSession)
 
   const joinedSubsidiarie = useUserSessionStore((state) => state.joinedSubsidiarie)
 
+  const [birthdayListDialogOpen, setBirthdayListDialogOpen] = useState(false)
+
   return (
     <>
       <Navbar />
 
       <div className="container">
-        <div className="mt-3">
-          <h1>Página inicial</h1>
+        <div className="d-inline-flex justify-content-between w-100 mt-4">
+          <div>
+            <h1>Página inicial</h1>
 
-          <span className="text-muted">
-            Abaixo seguem os dados principais da filial em que você está e de seu usuário
-          </span>
+            <span className="text-muted">
+              Abaixo seguem os dados principais da filial em que você está e de seu usuário
+            </span>
+          </div>
+
+          <div>
+            <button className="btn btn-primary" onClick={() => handleOpenDialog(setBirthdayListDialogOpen)}>
+              Lista de aniversariantes da filial
+            </button>
+          </div>
         </div>
 
         <div className="mt-3">
@@ -63,6 +76,11 @@ const Home = () => {
           <span><b>Telefone</b>: {joinedSubsidiarie?.phone}</span>
         </div>
       </div>
+
+      <BirthdayListDialog
+        birthdayListDialogOpen={birthdayListDialogOpen}
+        setBirthdayListDialogOpen={setBirthdayListDialogOpen}
+      />
     </>
   )
 }

@@ -10,6 +10,7 @@ const Dialog = (props) => {
     type = "add/edit",
     handleSubmitDialog,
     disabledSubmitButton,
+    hideSubmitButton = false,
   } = props
 
   return (
@@ -37,13 +38,17 @@ const Dialog = (props) => {
             Fechar
           </Button>
 
-          <Button
-            variant={type == "add/edit" && "success" || "danger"}
-            onClick={handleSubmitDialog}
-            disabled={disabledSubmitButton}
-          >
-            Confirmar
-          </Button>
+          {
+            !hideSubmitButton && (
+              <Button
+                variant={type == "add/edit" && "success" || "danger"}
+                onClick={handleSubmitDialog}
+                disabled={disabledSubmitButton}
+              >
+                Confirmar
+              </Button>
+            )
+          }
         </Modal.Footer>
       </Modal>
     </>
