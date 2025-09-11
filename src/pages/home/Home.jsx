@@ -38,6 +38,10 @@ const Home = () => {
         </div>
 
         <div>
+          <span><b>Tipo de usuário</b>: {userSession?.is_admin && "Administrador" || "Comum"}</span>
+        </div>
+
+        <div>
           <span><b>Acesso</b>: {userSession?.login}</span>
         </div>
 

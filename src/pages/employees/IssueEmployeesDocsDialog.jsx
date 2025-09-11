@@ -12,6 +12,7 @@ import HealthDoc from './employeesDocs/HealthDoc'
 import IntegrationDoc from './employeesDocs/IntegrationDoc'
 import ResponsabilityDoc from './employeesDocs/ResponsabilityDoc'
 import WhatsAppDoc from "./employeesDocs/WhatsAppDoc"
+import WorkJourneyDoc from './employeesDocs/WorkJourneyDoc'
 
 const IssueEmployeesDocsDialog = (props) => {
   const { issueEmployeesDocsDialogOpen, setIssueEmployeesDocsDialogOpen, selectedEmployee, setSelectedEmployee } = props
@@ -35,9 +36,17 @@ const IssueEmployeesDocsDialog = (props) => {
   const onSubmit = async (data) => {
     const { docOption } = data
 
-    let employeeFunction = await getRequest(`/functions/${selectedEmployee?.function_id}`).then((response) => response.data)
-
-    let employeeNeighborhood = await getRequest(`/neighborhoods/${selectedEmployee?.neighborhood_id}`).then((response) => response.data)
+    const [employeeFunction, employeeNeighborhood, employeeTurn] = await Promise.all([
+      selectedEmployee?.function_id
+        ? getRequest(`/functions/${selectedEmployee.function_id}`).then(res => res.data)
+        : {},
+      selectedEmployee?.neighborhood_id
+        ? getRequest(`/neighborhoods/${selectedEmployee.neighborhood_id}`).then(res => res.data)
+        : {},
+      selectedEmployee?.turn_id
+        ? getRequest(`/turns/${selectedEmployee.turn_id}`).then(res => res.data)
+        : {}
+    ])
 
     let optionsPrints = {
       "ethnicityDoc": (
@@ -77,6 +86,14 @@ const IssueEmployeesDocsDialog = (props) => {
           selectedEmployee={selectedEmployee}
           employeeFunction={employeeFunction}
           deliveryDate={watch("IntegrationDocDeliveryDate")}
+        />
+      ),
+      "WorkJourneyDoc": (
+        <WorkJourneyDoc
+          joinedSubsidiarie={joinedSubsidiarie}
+          selectedEmployee={selectedEmployee}
+          employeeTurn={employeeTurn}
+          deliveryDate={watch("WorkJourneyDocDeliveryDate")}
         />
       ),
     }
@@ -148,6 +165,15 @@ const IssueEmployeesDocsDialog = (props) => {
                 control={control}
                 label={"Data de entrega"}
                 name={"IntegrationDocDeliveryDate"}
+                type={"date"}
+              />
+            </>
+          ) || selectedDocOption == "WorkJourneyDoc" && (
+            <>
+              <Input
+                control={control}
+                label={"Data de entrega"}
+                name={"WorkJourneyDocDeliveryDate"}
                 type={"date"}
               />
             </>
