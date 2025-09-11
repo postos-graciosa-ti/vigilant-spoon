@@ -3,11 +3,14 @@ import Navbar from "../../components/Navbar"
 import useUserSessionStore from "../../stores/userSession"
 import handleOpenDialog from "../../utils/handleOpenDialog"
 import BirthdayListDialog from "./BirthdayListDialog"
+import SubsidiarieEmployeesTableDialog from "./SubsidiarieEmployeesTableDialog"
 
 const Home = () => {
   const userSession = useUserSessionStore((state) => state.userSession)
 
   const joinedSubsidiarie = useUserSessionStore((state) => state.joinedSubsidiarie)
+
+  const [subsidiarieEmployeesTableDialogOpen, setSubsidiarieEmployeesTableDialogOpen] = useState(false)
 
   const [birthdayListDialogOpen, setBirthdayListDialogOpen] = useState(false)
 
@@ -23,12 +26,6 @@ const Home = () => {
             <span className="text-muted">
               Abaixo seguem os dados principais da filial em que você está e de seu usuário
             </span>
-          </div>
-
-          <div>
-            <button className="btn btn-primary" onClick={() => handleOpenDialog(setBirthdayListDialogOpen)}>
-              Lista de aniversariantes da filial
-            </button>
           </div>
         </div>
 
@@ -57,6 +54,18 @@ const Home = () => {
         </div>
 
         <div>
+          <button className="btn btn-link p-0" onClick={() => handleOpenDialog(setSubsidiarieEmployeesTableDialogOpen)}>
+            Quadro de funcionários da filial
+          </button>
+        </div>
+
+        <div>
+          <button className="btn btn-link p-0" onClick={() => handleOpenDialog(setBirthdayListDialogOpen)}>
+            Lista de aniversariantes da filial
+          </button>
+        </div>
+
+        <div>
           <span><b>Nome</b>: {joinedSubsidiarie?.name}</span>
         </div>
 
@@ -76,6 +85,11 @@ const Home = () => {
           <span><b>Telefone</b>: {joinedSubsidiarie?.phone}</span>
         </div>
       </div>
+
+      <SubsidiarieEmployeesTableDialog
+        subsidiarieEmployeesTableDialogOpen={subsidiarieEmployeesTableDialogOpen}
+        setSubsidiarieEmployeesTableDialogOpen={setSubsidiarieEmployeesTableDialogOpen}
+      />
 
       <BirthdayListDialog
         birthdayListDialogOpen={birthdayListDialogOpen}
