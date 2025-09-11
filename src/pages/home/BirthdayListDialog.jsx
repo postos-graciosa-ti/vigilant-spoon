@@ -77,47 +77,53 @@ const BirthdayListDialog = (props) => {
         </button>
       </div>
 
-      {birthdayList && (
-        <>
-          <div className="table-responsive" ref={tableRef} id="birthday-table">
-            <div>
-              <b>Aniversariantes do mês de {dayjs(watch("month")).format("MMMM")} da filial {joinedSubsidiarie?.name}</b>
+      {
+        birthdayList && (
+          <>
+            <div className="table-responsive" ref={tableRef} id="birthday-table">
+              <div>
+                <b>Aniversariantes do mês de {dayjs(watch("month")).format("MMMM")} da filial {joinedSubsidiarie?.name}</b>
+              </div>
+
+              <table className="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Nome</th>
+
+                    <th>Data de nascimento</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {
+                    birthdayList.length > 0 ? (
+                      birthdayList.map((employee) => (
+                        <tr key={employee.id}>
+                          <td>{employee.name}</td>
+
+                          <td>{dayjs(employee.datebirth).format("DD/MM/YYYY")}</td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan={2} className="text-center">
+                          Nenhum registro disponível
+                        </td>
+                      </tr>
+                    )
+                  }
+                </tbody>
+              </table>
             </div>
 
-            <table className="table table-hover">
-              <thead>
-                <tr>
-                  <th>Nome</th>
-                  <th>Data de nascimento</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {birthdayList.length > 0 ? (
-                  birthdayList.map((employee) => (
-                    <tr key={employee.id}>
-                      <td>{employee.name}</td>
-                      <td>{dayjs(employee.datebirth).format("DD/MM/YYYY")}</td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan={2} className="text-center">
-                      Nenhum registro disponível
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-
-          <div className="mb-3">
-            <button className="btn btn-primary w-100" onClick={handlePrint}>
-              Imprimir lista de aniversariantes
-            </button>
-          </div>
-        </>
-      )}
+            <div className="mb-3">
+              <button className="btn btn-primary w-100" onClick={handlePrint}>
+                Imprimir lista de aniversariantes
+              </button>
+            </div>
+          </>
+        )
+      }
     </Dialog>
   )
 }
