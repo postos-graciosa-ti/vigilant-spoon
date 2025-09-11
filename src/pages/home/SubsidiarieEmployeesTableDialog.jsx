@@ -2,10 +2,12 @@ import { useEffect, useState } from "react"
 import {
   Bar,
   BarChart,
-  CartesianGrid, Legend,
+  CartesianGrid,
+  Legend,
   ResponsiveContainer,
   Tooltip,
-  XAxis, YAxis
+  XAxis,
+  YAxis
 } from "recharts"
 import Dialog from "../../components/Dialog"
 import getRequest from "../../requests/getRequest"
@@ -16,7 +18,7 @@ const SubsidiarieEmployeesTableDialog = (props) => {
 
   const joinedSubsidiarie = useUserSessionStore((state) => state.joinedSubsidiarie)
 
-  const [tableData, setTableData] = useState([])
+  const [tableData, setTableData] = useState({ total_employees: 0, turns: [] })
 
   useEffect(() => {
     if (subsidiarieEmployeesTableDialogOpen) {
@@ -27,7 +29,9 @@ const SubsidiarieEmployeesTableDialog = (props) => {
 
   const handleCloseDialog = () => setSubsidiarieEmployeesTableDialogOpen(false)
 
-  const chartData = tableData.map((turn) => ({
+  const totalEmployees = tableData.total_employees || 0
+
+  const chartData = (tableData.turns || []).map((turn) => ({
     turn: turn.turn,
     total: turn.functions.reduce(
       (acc, func) => acc + func.employees.length,
@@ -43,6 +47,8 @@ const SubsidiarieEmployeesTableDialog = (props) => {
       hideSubmitButton={true}
     >
       <div className="d-flex flex-column gap-4">
+        <span className="fw-bold">Total de funcionários: {totalEmployees}</span>
+
         {
           chartData.length > 0 && (
             <div style={{ width: "100%", height: "300px" }} className="card p-3">
@@ -61,8 +67,8 @@ const SubsidiarieEmployeesTableDialog = (props) => {
         }
 
         {
-          Array.isArray(tableData) && tableData.length > 0 ? (
-            tableData.map((turn, tIndex) => (
+          Array.isArray(tableData.turns) && tableData.turns.length > 0 ? (
+            tableData.turns.map((turn, tIndex) => (
               <div key={tIndex} className="card shadow-sm">
                 <div className="card-body">
                   <h5 className="card-title">{turn.turn}</h5>
