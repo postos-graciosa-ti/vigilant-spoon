@@ -27,20 +27,6 @@ const Home = () => {
               Abaixo seguem os dados principais da filial em que você está e de seu usuário
             </span>
           </div>
-
-          <div>
-            <div>
-              <button className="btn btn-primary mb-3" onClick={() => handleOpenDialog(setSubsidiarieEmployeesTableDialogOpen)}>
-                Quadro de funcionários da filial
-              </button>
-            </div>
-
-            <div>
-              <button className="btn btn-primary" onClick={() => handleOpenDialog(setBirthdayListDialogOpen)}>
-                Lista de aniversariantes da filial
-              </button>
-            </div>
-          </div>
         </div>
 
         <div className="mt-3">
@@ -65,6 +51,18 @@ const Home = () => {
 
         <div className="mt-3">
           <h3>Dados de filial</h3>
+        </div>
+
+        <div>
+          <button className="btn btn-link p-0" onClick={() => handleOpenDialog(setSubsidiarieEmployeesTableDialogOpen)}>
+            Quadro de funcionários da filial
+          </button>
+        </div>
+
+        <div>
+          <button className="btn btn-link p-0" onClick={() => handleOpenDialog(setBirthdayListDialogOpen)}>
+            Lista de aniversariantes da filial
+          </button>
         </div>
 
         <div>

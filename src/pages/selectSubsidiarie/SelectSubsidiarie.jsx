@@ -1,10 +1,14 @@
 import { useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import ReactSelect from "react-select"
 import useUserSessionStore from "../../stores/userSession"
+import handleOpenDialog from "../../utils/handleOpenDialog"
+import AllEmployeesTableDialog from "./AllEmployeesTableDialog"
 
 const SelectSubsidiarie = () => {
   const userSession = useUserSessionStore((state) => state.userSession)
+
+  const [allEmployeesTableDialogOpen, setAllEmployeesTableDialogOpen] = useState(false)
 
   let subsidiariesOptions = userSession?.user_subsidiaries?.map((subsidiarie) => ({ value: subsidiarie.id, label: subsidiarie.name }))
 
@@ -25,7 +29,7 @@ const SelectSubsidiarie = () => {
   return (
     <>
       <div className="container">
-        <div className="mt-5">
+        {/* <div className="mt-5">
           <h1>Quadro geral de funcionários</h1>
 
           <span className="text-muted">
@@ -51,6 +55,26 @@ const SelectSubsidiarie = () => {
           <Link to="/candidates" className="btn btn-secondary w-100 mt-3 mb-3 disabled">
             Ir
           </Link>
+        </div> */}
+
+        <div className="mt-3">
+          <h3>Outros</h3>
+        </div>
+
+        {
+          userSession?.is_admin && (
+            <div>
+              <button className="btn btn-link p-0" onClick={() => handleOpenDialog(setAllEmployeesTableDialogOpen)}>
+                Quadro geral de funcionários
+              </button>
+            </div>
+          )
+        }
+
+        <div>
+          <button className="btn btn-link p-0 disabled">
+            Processos seletivos
+          </button>
         </div>
 
         <div className="mt-3 mb-3">
@@ -77,6 +101,11 @@ const SelectSubsidiarie = () => {
           </button>
         </div>
       </div>
+
+      <AllEmployeesTableDialog
+        allEmployeesTableDialogOpen={allEmployeesTableDialogOpen}
+        setAllEmployeesTableDialogOpen={setAllEmployeesTableDialogOpen}
+      />
     </>
   )
 }
