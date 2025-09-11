@@ -33,16 +33,9 @@ const RequestAdmissionExamDialog = (props) => {
       handleCloseDialog={handleCloseDialog}
       title={"Solicitar exame admissional do SESI"}
       handleSubmitDialog={handleRequestAdmissionExam}
+      disabledSubmitButton={isLoading}
     >
       Deseja solicitar o exame admissional do SESI? Dica: é uma boa prática revisar os dados antes de encaminhá-los!
-
-      {
-        isLoading && (
-          <div>
-            Carregando... Por favor, aguarde...
-          </div>
-        )
-      }
     </Dialog>
   )
 }
