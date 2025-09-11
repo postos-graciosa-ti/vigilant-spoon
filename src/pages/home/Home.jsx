@@ -3,11 +3,14 @@ import Navbar from "../../components/Navbar"
 import useUserSessionStore from "../../stores/userSession"
 import handleOpenDialog from "../../utils/handleOpenDialog"
 import BirthdayListDialog from "./BirthdayListDialog"
+import SubsidiarieEmployeesTableDialog from "./SubsidiarieEmployeesTableDialog"
 
 const Home = () => {
   const userSession = useUserSessionStore((state) => state.userSession)
 
   const joinedSubsidiarie = useUserSessionStore((state) => state.joinedSubsidiarie)
+
+  const [subsidiarieEmployeesTableDialogOpen, setSubsidiarieEmployeesTableDialogOpen] = useState(false)
 
   const [birthdayListDialogOpen, setBirthdayListDialogOpen] = useState(false)
 
@@ -26,9 +29,17 @@ const Home = () => {
           </div>
 
           <div>
-            <button className="btn btn-primary" onClick={() => handleOpenDialog(setBirthdayListDialogOpen)}>
-              Lista de aniversariantes da filial
-            </button>
+            <div>
+              <button className="btn btn-primary mb-3" onClick={() => handleOpenDialog(setSubsidiarieEmployeesTableDialogOpen)}>
+                Quadro de funcionários da filial
+              </button>
+            </div>
+
+            <div>
+              <button className="btn btn-primary" onClick={() => handleOpenDialog(setBirthdayListDialogOpen)}>
+                Lista de aniversariantes da filial
+              </button>
+            </div>
           </div>
         </div>
 
@@ -76,6 +87,11 @@ const Home = () => {
           <span><b>Telefone</b>: {joinedSubsidiarie?.phone}</span>
         </div>
       </div>
+
+      <SubsidiarieEmployeesTableDialog
+        subsidiarieEmployeesTableDialogOpen={subsidiarieEmployeesTableDialogOpen}
+        setSubsidiarieEmployeesTableDialogOpen={setSubsidiarieEmployeesTableDialogOpen}
+      />
 
       <BirthdayListDialog
         birthdayListDialogOpen={birthdayListDialogOpen}

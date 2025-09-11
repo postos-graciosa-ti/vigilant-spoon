@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom"
 import App from "./App"
+import Candidates from "./pages/candidates/Candidates"
 import DailySales from "./pages/dailySales/DailySales"
 import Employees from "./pages/employees/Employees"
 import Home from "./pages/home/Home"
@@ -13,6 +14,10 @@ const Routes = createBrowserRouter([
   {
     path: "/select-subsidiarie",
     element: <SelectSubsidiarie />,
+  },
+  {
+    path: "/candidates",
+    element: <Candidates />,
   },
   {
     path: "/home",
