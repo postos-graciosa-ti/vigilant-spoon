@@ -23,6 +23,7 @@ const useSelectOptionsStore = create((set) => ({
     { value: "HealthDoc", label: "Termo de ciência do protocolo de homologação de atestado" },
     { value: "WhatsAppDoc", label: "Termo de compromisso para utilização do grupo de WhatsApp" },
     { value: "IntegrationDoc", label: "Termo de confirmação de participação na integração" },
+    { value: "WorkJourneyDoc", label: "Declaração de horário de trabalho" },
   ],
 
   trueFalseOptions: [
