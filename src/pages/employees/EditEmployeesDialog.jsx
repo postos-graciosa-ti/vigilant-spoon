@@ -5,6 +5,7 @@ import Input from "../../components/Input"
 import InputFile from "../../components/InputFile"
 import PdfViewer from "../../components/PdfViewer"
 import Select from "../../components/Select"
+import SelectCreatable from "../../components/SelectCreatable"
 import patchRequest from "../../requests/patchRequest"
 import useSelectOptionsStore from "../../stores/selectOptions"
 import useUserSessionStore from "../../stores/userSession"
@@ -232,18 +233,34 @@ const EditEmployeesDialog = (props) => {
         type="text"
       />
 
-      <Select
+      {/* <Select
         control={control}
         label="Cidade de residência"
         name="residence_city_id"
         options={citiesOptions}
+      /> */}
+
+      <SelectCreatable
+        control={control}
+        name="residence_city_id"
+        label="Cidade de residência"
+        options={citiesOptions}
+        createOptionEndpoint={"cities"}
       />
 
-      <Select
+      {/* <Select
         control={control}
         label="Bairro de residência"
         name="neighborhood_id"
         options={neighborhoodsOptions}
+      /> */}
+
+      <SelectCreatable
+        control={control}
+        name="neighborhood_id"
+        label="Bairro de residência"
+        options={neighborhoodsOptions}
+        createOptionEndpoint={"neighborhoods"}
       />
 
       <Input
@@ -281,18 +298,34 @@ const EditEmployeesDialog = (props) => {
         type="date"
       />
 
-      <Select
+      {/* <Select
         control={control}
         label="estado de nascimento"
         name="birthstate_id"
         options={statesOptions}
+      /> */}
+
+      <SelectCreatable
+        control={control}
+        name="birthstate_id"
+        label="estado de nascimento"
+        options={statesOptions}
+        createOptionEndpoint={"states"}
       />
 
-      <Select
+      {/* <Select
         control={control}
         label="Cidade de nascimento"
         name="birthcity_id"
         options={citiesOptions}
+      /> */}
+
+      <SelectCreatable
+        control={control}
+        name="birthcity_id"
+        label="Cidade de nascimento"
+        options={citiesOptions}
+        createOptionEndpoint={"cities"}
       />
 
       <Input
