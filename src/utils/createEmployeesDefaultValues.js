@@ -9,9 +9,9 @@ const handleSelectDefaultValue = (value) => {
 export const createEmployeesDefaultValues = (selectedEmployee = {}) => ({
 
   name: selectedEmployee.name || "", // padrão para campos do tipo texto
-  tshirt_len: selectedEmployee.tshirt_len || "",
-  legs_len: selectedEmployee.legs_len || "",
-  feet_len: selectedEmployee.feet_len || "",
+  // tshirt_len: selectedEmployee.tshirt_len || "",
+  // legs_len: selectedEmployee.legs_len || "",
+  // feet_len: selectedEmployee.feet_len || "",
   function_id: selectedEmployee.function_id !== undefined ? selectedEmployee.function_id : null, // padrão para campos do tipo Select
   turn_id: selectedEmployee.turn_id !== undefined ? selectedEmployee.turn_id : null,
   admission_date: selectedEmployee.admission_date || "",
@@ -22,6 +22,7 @@ export const createEmployeesDefaultValues = (selectedEmployee = {}) => ({
   gender_id: selectedEmployee.gender_id !== undefined ? selectedEmployee.gender_id : null,
   has_previous_experience: selectedEmployee.has_previous_experience !== undefined ? selectedEmployee.has_previous_experience : null,
   civil_status_id: selectedEmployee.civil_status_id !== undefined ? selectedEmployee.civil_status_id : null,
+  emergency_contact_name: selectedEmployee.emergency_contact_name || "",
   emergency_number: selectedEmployee.emergency_number || "",
   esocial: selectedEmployee.esocial || "",
   access_code: selectedEmployee.access_code || "",
@@ -78,8 +79,8 @@ export const createEmployeesDefaultValues = (selectedEmployee = {}) => ({
   wage_advance: selectedEmployee.wage_advance || "",
   health_insurance: selectedEmployee.health_insurance || "",
   life_insurance: selectedEmployee.life_insurance || "",
-  ag: selectedEmployee.ag || "",
-  cc: selectedEmployee.cc || "",
+  // ag: selectedEmployee.ag || "",
+  // cc: selectedEmployee.cc || "",
   has_harmfull_exposition: selectedEmployee.has_harmfull_exposition !== undefined ? selectedEmployee.has_harmfull_exposition : null,
   nationalitie_id: selectedEmployee.nationalitie_id !== undefined ? selectedEmployee.nationalitie_id : null,
   street_complement: selectedEmployee.street_complement || "",
