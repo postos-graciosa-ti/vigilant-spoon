@@ -101,9 +101,9 @@ export const createEmployeesDefaultValues = (selectedEmployee = {}) => ({
           "cpf": "",
           "book": "",
           "paper": "",
-          "birthCertificate": "",
-          "vaccinationCard": "",
-          "schoolProof": "",
+          // "birthCertificate": "",
+          // "vaccinationCard": "",
+          // "schoolProof": "",
         }
       ],
 
@@ -116,6 +116,7 @@ export const createEmployeesDefaultValues = (selectedEmployee = {}) => ({
   cnh_file: selectedEmployee.cnh_file ? selectedEmployee.cnh_file : null,
   marriage_certificate_file: selectedEmployee.marriage_certificate_file ? selectedEmployee.marriage_certificate_file : null,
   military_certificate_file: selectedEmployee.military_certificate_file ? selectedEmployee.military_certificate_file : null,
+  employee_files: selectedEmployee.employee_files ? selectedEmployee.employee_files : null,
 
   // name: selectedEmployee.name || "", // padrão para campos do tipo texto
   // function_id: selectedEmployee.function_id !== undefined ? selectedEmployee.function_id : null, // padrão para campos do tipo Select

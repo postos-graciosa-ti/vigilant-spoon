@@ -9,6 +9,7 @@ import postRequest from "../../requests/postRequest"
 import useSelectOptionsStore from "../../stores/selectOptions"
 import useUserSessionStore from "../../stores/userSession"
 import { createEmployeesDefaultValues } from "../../utils/createEmployeesDefaultValues"
+import DragAndDropFiles from "../../components/DragAndDropFiles"
 
 const AddEmployeesDialog = (props) => {
   const { addEmployeesDialogOpen, setAddEmployeesDialogOpen, getEmployeeList } = props
@@ -57,6 +58,8 @@ const AddEmployeesDialog = (props) => {
   const onSubmit = (data) => {
     setDisabledSubmitButton(true)
 
+    console.log(data)
+
     const body = {
       subsidiarie_id: joinedSubsidiarie?.id,
       ...data,
@@ -78,12 +81,12 @@ const AddEmployeesDialog = (props) => {
         Dica: utilize CTRL + F para pesquisa rápida
       </div>
 
-      {/* <Input
+      <Input
         control={control}
         label="Nome"
         name="name"
         type="text"
-      /> */}
+      />
 
       {/* <Input
         control={control}
@@ -728,23 +731,23 @@ const AddEmployeesDialog = (props) => {
                 type="text"
               />
 
-              <InputFile
+              {/* <InputFile
                 control={control}
                 label="Certidão de nascimento"
                 name={`parents.${index}.birthCertificate`}
-              />
+              /> */}
 
-              <InputFile
+              {/* <InputFile
                 control={control}
                 label="Carteira de vacinação"
                 name={`parents.${index}.vaccinationCard`}
-              />
+              /> */}
 
-              <InputFile
+              {/* <InputFile
                 control={control}
                 label="Comprovante de frequência escolar"
                 name={`parents.${index}.schoolingProof`}
-              />
+              /> */}
             </div>
           ))
         }
@@ -758,58 +761,64 @@ const AddEmployeesDialog = (props) => {
         </button>
       </div>
 
-      <InputFile
+      {/* <InputFile
         control={control}
         label="Arquivo de CTPS"
         name="ctps_file"
-      />
+      /> */}
 
-      <InputFile
+      {/* <InputFile
         control={control}
         label="Arquivo de exame médico admissional"
         name="admission_health_exam_file"
-      />
+      /> */}
 
-      <InputFile
+      {/* <InputFile
         control={control}
         label="Arquivo de identidade"
         name="identity_file"
-      />
+      /> */}
 
-      <InputFile
+      {/* <InputFile
         control={control}
         label="Arquivo de CPF"
         name="cpf_file"
-      />
+      /> */}
 
-      <InputFile
+      {/* <InputFile
         control={control}
         label="Arquivo de título de eleitor"
         name="votant_title_file"
-      />
+      /> */}
 
-      <InputFile
+      {/* <InputFile
         control={control}
         label="Comprovante de residência"
         name="residence_proof"
-      />
+      /> */}
 
-      <InputFile
+      {/* <InputFile
         control={control}
         label="Arquivo de CNH"
         name="cnh_file"
-      />
+      /> */}
 
-      <InputFile
+      {/* <InputFile
         control={control}
         label="Arquivo de certidão de casamento"
         name="marriage_certificate_file"
-      />
+      /> */}
 
-      <InputFile
+      {/* <InputFile
         control={control}
         label="Arquivo de certificado de reservista"
         name="military_certificate_file"
+      /> */}
+
+      <DragAndDropFiles
+        control={control}
+        name="employee_files"
+        label="Documentos do funcionário (ficha de EPI, documentos de filhos inclusos)"
       />
 
       {/* <Input
