@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useFieldArray, useForm } from "react-hook-form"
 import Dialog from "../../components/Dialog"
+import DragAndDropFiles from "../../components/DragAndDropFiles"
 import Input from "../../components/Input"
 import InputFile from "../../components/InputFile"
 import PdfViewer from "../../components/PdfViewer"
@@ -739,29 +740,29 @@ const EditEmployeesDialog = (props) => {
                 type="text"
               />
 
-              <InputFile
+              {/* <InputFile
                 control={control}
                 label="Certidão de nascimento"
                 name={`parents.${index}.birthCertificate`}
-              />
+              /> */}
 
-              <PdfViewer base64={selectedEmployee?.parents?.[index]?.birthCertificate} />
+              {/* <PdfViewer base64={selectedEmployee?.parents?.[index]?.birthCertificate} /> */}
 
-              <InputFile
+              {/* <InputFile
                 control={control}
                 label="Carteira de vacinação"
                 name={`parents.${index}.vaccinationCard`}
-              />
+              /> */}
 
-              <PdfViewer base64={selectedEmployee?.parents?.[index]?.vaccinationCard} />
+              {/* <PdfViewer base64={selectedEmployee?.parents?.[index]?.vaccinationCard} /> */}
 
-              <InputFile
+              {/* <InputFile
                 control={control}
                 label="Comprovante de frequência escolar"
                 name={`parents.${index}.schoolingProof`}
-              />
+              /> */}
 
-              <PdfViewer base64={selectedEmployee?.parents?.[index]?.schoolingProof} />
+              {/* <PdfViewer base64={selectedEmployee?.parents?.[index]?.schoolingProof} /> */}
             </div>
           ))
         }
@@ -775,77 +776,89 @@ const EditEmployeesDialog = (props) => {
         </button>
       </div>
 
-      <InputFile
+      {/* <InputFile
         control={control}
         label="Arquivo de CTPS"
         name="ctps_file"
-      />
+      /> */}
 
-      <PdfViewer base64={selectedEmployee?.ctps_file} />
+      {/* <PdfViewer base64={selectedEmployee?.ctps_file} /> */}
 
-      <InputFile
+      {/* <InputFile
         control={control}
         label="Arquivo de exame médico admissional"
         name="admission_health_exam_file"
-      />
+      /> */}
 
-      <PdfViewer base64={selectedEmployee?.admission_health_exam_file} />
+      {/* <PdfViewer base64={selectedEmployee?.admission_health_exam_file} /> */}
 
-      <InputFile
+      {/* <InputFile
         control={control}
         label="Arquivo de identidade"
         name="identity_file"
-      />
+      /> */}
 
-      <PdfViewer base64={selectedEmployee?.identity_file} />
+      {/* <PdfViewer base64={selectedEmployee?.identity_file} /> */}
 
-      <InputFile
+      {/* <InputFile
         control={control}
         label="Arquivo de CPF"
         name="cpf_file"
-      />
+      /> */}
 
-      <PdfViewer base64={selectedEmployee?.cpf_file} />
+      {/* <PdfViewer base64={selectedEmployee?.cpf_file} /> */}
 
-      <InputFile
+      {/* <InputFile
         control={control}
         label="Arquivo de título de eleitor"
         name="votant_title_file"
-      />
+      /> */}
 
-      <PdfViewer base64={selectedEmployee?.votant_title_file} />
+      {/* <PdfViewer base64={selectedEmployee?.votant_title_file} /> */}
 
-      <InputFile
+      {/* <InputFile
         control={control}
         label="Comprovante de residência"
         name="residence_proof"
-      />
+      /> */}
 
-      <PdfViewer base64={selectedEmployee?.residence_proof} />
+      {/* <PdfViewer base64={selectedEmployee?.residence_proof} /> */}
 
-      <InputFile
+      {/* <InputFile
         control={control}
         label="Arquivo de CNH"
         name="cnh_file"
-      />
+      /> */}
 
-      <PdfViewer base64={selectedEmployee?.cnh_file} />
+      {/* <PdfViewer base64={selectedEmployee?.cnh_file} /> */}
 
-      <InputFile
+      {/* <InputFile
         control={control}
         label="Arquivo de certidão de casamento"
         name="marriage_certificate_file"
-      />
+      /> */}
 
-      <PdfViewer base64={selectedEmployee?.marriage_certificate_file} />
+      {/* <PdfViewer base64={selectedEmployee?.marriage_certificate_file} /> */}
 
-      <InputFile
+      {/* <InputFile
         control={control}
         label="Arquivo de certificado de reservista"
         name="military_certificate_file"
+      /> */}
+
+      {/* <PdfViewer base64={selectedEmployee?.military_certificate_file} /> */}
+
+      <DragAndDropFiles
+        control={control}
+        name="employee_files"
+        label="Documentos do funcionário (ficha de EPI, documentos de filhos inclusos)"
       />
 
-      <PdfViewer base64={selectedEmployee?.military_certificate_file} />
+      {
+        selectedEmployee?.employee_files?.map((file) => (
+          <PdfViewer base64={file} />
+        ))
+      }
 
       {/* <Input
         control={control}
