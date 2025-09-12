@@ -85,6 +85,9 @@ const EditEmployeesDialog = (props) => {
       handleSubmitDialog={handleSubmit(onSubmit)}
       disabledSubmitButton={disabledSubmitButton}
     >
+      <div className="fw-bold mb-3">
+        Dica: utilize CTRL + F para pesquisa rápida
+      </div>
 
       <Input
         control={control}
@@ -93,26 +96,26 @@ const EditEmployeesDialog = (props) => {
         type="text"
       />
 
-      <Input
+      {/* <Input
         control={control}
         label="Tamanho de camisa"
         name="tshirt_len"
         type="text"
-      />
+      /> */}
 
-      <Input
+      {/* <Input
         control={control}
         label="Tamanho de calça"
         name="legs_len"
         type="text"
-      />
+      /> */}
 
-      <Input
+      {/* <Input
         control={control}
         label="Tamanho de sapato"
         name="feet_len"
         type="text"
-      />
+      /> */}
 
       <Select
         control={control}
@@ -182,6 +185,13 @@ const EditEmployeesDialog = (props) => {
         label="estado civil"
         name="civil_status_id"
         options={civilStatusOptions}
+      />
+
+      <Input
+        control={control}
+        label="Nome do contato de emergência"
+        name="emergency_contact_name"
+        type="text"
       />
 
       <Input
@@ -589,7 +599,7 @@ const EditEmployeesDialog = (props) => {
 
       <Input
         control={control}
-        label="Adiantamento salarial"
+        label="Adiantamento salarial (valor)"
         name="wage_advance"
         type="text"
       />
@@ -608,19 +618,19 @@ const EditEmployeesDialog = (props) => {
         type="text"
       />
 
-      <Input
+      {/* <Input
         control={control}
         label="AG"
         name="ag"
         type="text"
-      />
+      /> */}
 
-      <Input
+      {/* <Input
         control={control}
         label="CC"
         name="cc"
         type="text"
-      />
+      /> */}
 
       <Select
         control={control}
